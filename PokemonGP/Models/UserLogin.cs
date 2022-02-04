@@ -57,6 +57,15 @@ namespace PokemonGP.Models
 
     public class UserDB
     {
+        public static List<UserLogin> GetUsers()
+        {
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                var users = ctx.UserStorage.ToList();
+                return users;
+            }
+        }
+
         public static UserLogin AddUser(UserLogin user)
         {
             using (PokemonContext ctx = new PokemonContext())

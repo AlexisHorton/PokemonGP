@@ -18,29 +18,10 @@ namespace PokemonGP.Controllers
             return UserDB.listMembers(userID);
         }
 
-        [HttpGet]
-        public List<PokemonMembers> listTeam(int userID)
-        {
-            return UserDB.listTeam(userID);
-        }
-
-        [HttpPost]
-        public UserLogin AddUser(UserLogin newUser)
-        {
-            return UserDB.AddUser(newUser);
-        }
-
         [HttpPost]
         public PokemonMembers addPokemon(PokemonMembers newMember)
         {
             return UserDB.addPokemon(newMember);
-        }
-
-
-        [HttpDelete]
-        public bool DeleteUser(int id)
-        {
-            return UserDB.DeleteUser(id);
         }
 
         [HttpDelete]
@@ -55,5 +36,10 @@ namespace PokemonGP.Controllers
             return UserDB.updatePokemon(member);
         }
 
+        public async Task<IActionResult> GetPokemon(int amount)
+        {
+            Pokemon resp = await PokemonAPI.GetPokemon(5);
+            return Content("Done");
+        }
     }
 }
