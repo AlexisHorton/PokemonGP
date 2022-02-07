@@ -36,5 +36,19 @@ namespace PokemonGP.Controllers
         {
             return UserDB.listTeam(userID);
         }
+
+        [HttpGet]
+        [Route("full_listG")]
+        public List<PokemonFull> listFull()
+        {
+            return UserDB.listFull();
+        }
+
+        [HttpPost]
+        [Route("full_listP")]
+        public Task<Pokemon> GetPokemon()
+        {
+            return PokemonAPI.GetPokemon();
+        }
     }
 }

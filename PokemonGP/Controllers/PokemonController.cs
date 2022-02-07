@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace PokemonGP.Controllers
 {
@@ -36,10 +38,5 @@ namespace PokemonGP.Controllers
             return UserDB.updatePokemon(member);
         }
 
-        public async Task<IActionResult> GetPokemon(int amount)
-        {
-            Pokemon resp = await PokemonAPI.GetPokemon(5);
-            return Content("Done");
-        }
     }
 }

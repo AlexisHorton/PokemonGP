@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PokemonGP.Models
 {
@@ -20,39 +21,33 @@ namespace PokemonGP.Models
         public int experience { get; set; }
         public int userid { get; set; }
         public int teampos { get; set; }
-
+        public string given_name { get; set; }
+        public string species { get; set; }
+        public string main_sprite { get; set; }
+        public int order { get; set; }
+        public int base_experience { get; set; }
+        public int maxhp { get; set; }
+        public int current_hp { get; set; }
+        public int attack { get; set; }
+        public int defense { get; set; }
+        public string type { get; set; }
     }
-    public class SubPokemon
+
+    public class PokemonFull
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+        public string species { get; set; }
+        public string main_sprite { get; set; }
         public int height { get; set; }
         public int weight { get; set; }
-        public int id { get; set; }
-        public string name { get; set; }
-        public int base_experience { get; set; }
         public int order { get; set; }
-    }
-    public class Subspecies
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-    public class Subsprites
-    {
-        public int id { get; set; }
-        public string back_default { get; set; }
-        public string front_default { get; set; }
-    }
-    public class PokemonStat
-    {
-        public int id { get; set; }
-        public string statname { get; set; }
-        public int basestat { get; set; }
-    }
-    public class PokemonType
-    {
-        public int id { get; set; }
-        public string pokemontype { get; set; }
+        public int base_experience { get; set; }
+        public int maxhp { get; set; }
+        public int current_hp { get; set; }
+        public int attack { get; set; }
+        public int defense { get; set; }
+        public string type { get; set; }
     }
 
     public class UserDB
@@ -107,6 +102,16 @@ namespace PokemonGP.Models
             return result;
         }
 
+        public static List<PokemonFull> listFull()
+        {
+            List<PokemonFull> result = null;
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                result = ctx.PokemonFullList.ToList();
+            }
+            return result;
+        }
+
         public static PokemonMembers addPokemon(PokemonMembers member)
         {
             using (PokemonContext ctx = new PokemonContext())
@@ -145,18 +150,46 @@ namespace PokemonGP.Models
     {
         public DbSet<UserLogin> UserStorage { get; set; }
         public DbSet<PokemonMembers> MemberStorage { get; set; }
-        public DbSet<SubPokemon> SubPokemon { get; set; }
-        public DbSet<Subspecies> Subspecies { get; set; }
-        public DbSet<Subsprites> Subsprites { get; set; }
-        public DbSet<PokemonStat> PokemonStat { get; set; }
-        public DbSet<PokemonType> PokemonType { get; set; }
+        public DbSet<PokemonFull> PokemonFullList { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=pokemonuserlogin;Integrated Security=SSPI;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=pokemonDB;Integrated Security=SSPI;");
             // Or For username/password, use the following:
             // optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=efconsole1;User Id=sa;Password=abc123;");
+        }
+    }
+
+    public class PokemonDataBase
+    {
+        public static bool AddToFull(Pokemon monster)
+        {
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                List<PokemonFull> full = ctx.PokemonFullList.Where(s => s.order == monster.order).ToList();
+                if (full.Count > 0)
+                {
+                    return false;
+                }
+                PokemonFull newmon = new PokemonFull();
+                newmon.species = monster.species.name;
+                newmon.main_sprite = monster.sprites.front_default;
+                newmon.height = monster.height;
+                newmon.weight = monster.weight;
+                newmon.order = monster.order;
+                newmon.base_experience = monster.base_experience;
+                newmon.maxhp = monster.stats[0].base_stat;
+                newmon.current_hp = monster.stats[0].base_stat;
+                newmon.attack = monster.stats[1].base_stat;
+                newmon.defense = monster.stats[2].base_stat;
+                newmon.type = monster.types[0].type.name;
+
+
+                ctx.PokemonFullList.Add(newmon);
+                ctx.SaveChanges();
+            }
+            return true;
         }
     }
 }

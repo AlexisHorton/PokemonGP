@@ -63,11 +63,18 @@ namespace PokemonGP.Models
                 return _realClient;
             }
         }
-        public static async Task<Pokemon> GetPokemon(int amount)
+        public static async Task<Pokemon> GetPokemon()
         {
-            var connection = await MyHttp.GetAsync($"pokemon/?limit={amount}");
-            Pokemon pokemon = await connection.Content.ReadAsAsync<Pokemon>();
-            return pokemon;
+
+            for (int i = 1; i < 152; i++)
+            {
+                var connection = await MyHttp.GetAsync($"pokemon/{i}");
+                Pokemon pokemon2 = await connection.Content.ReadAsAsync<Pokemon>();
+
+                PokemonDataBase.AddToFull(pokemon2);
+            }
+
+            return null;
         }
     }
 }
