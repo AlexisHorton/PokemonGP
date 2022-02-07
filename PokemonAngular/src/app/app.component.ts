@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 @Component({
   selector: 'app-root',

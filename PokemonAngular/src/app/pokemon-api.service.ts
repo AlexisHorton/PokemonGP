@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pokemon } from './pokemonmembers';
+import { PokemonFull } from './pokemon-full';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,7 @@ export class PokemonAPIService {
     this.http.delete(`https://localhost:44347/pokemon?id=${id}`).subscribe(cb)
   }
 
-  GetPokemon(){
-    
+  GetPokemon(cb: any){
+    this.http.get<PokemonFull[]>('https://localhost:44347/userlogin/full_list').subscribe(cb)
   }
-
-
 }
