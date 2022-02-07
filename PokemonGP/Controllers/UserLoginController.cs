@@ -37,18 +37,10 @@ namespace PokemonGP.Controllers
             return UserDB.listTeam(userID);
         }
 
-        [HttpGet]
-        [Route("full_listG")]
-        public List<PokemonFull> listFull()
+        [HttpPut]
+        public PokemonMembers updatePokemon(PokemonMembers member)
         {
-            return UserDB.listFull();
-        }
-
-        [HttpPost]
-        [Route("full_listP")]
-        public Task<Pokemon> GetPokemon()
-        {
-            return PokemonAPI.GetPokemon();
+            return UserDB.updatePokemon(member);
         }
     }
 }

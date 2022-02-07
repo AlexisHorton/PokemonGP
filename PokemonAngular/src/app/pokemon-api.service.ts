@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Pokemon } from './pokemonmembers';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PokemonAPIService {
+
+  constructor(private http: HttpClient) { }
+
+  listMembers(userID: number, cb: any ){
+    this.http.get<Pokemon[]>('https://localhost:44347/pokemon').subscribe(cb)
+  }
+
+  addPokemon(newMember: Pokemon, cb: any){
+    this.http.post<Pokemon[]>('https://localhost:44347/pokemon', newMember).subscribe(cb)
+  }
+
+  deletePokemon(id: number, cb: any){
+    this.http.delete(`https://localhost:44347/pokemon?id=${id}`).subscribe(cb)
+  }
+
+  GetPokemon(){
+    
+  }
+
+
+}

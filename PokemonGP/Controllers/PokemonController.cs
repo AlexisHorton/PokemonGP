@@ -32,11 +32,19 @@ namespace PokemonGP.Controllers
             return UserDB.deletePokemon(id);
         }
 
-        [HttpPut]
-        public PokemonMembers updatePokemon(PokemonMembers member)
+
+        [HttpGet]
+        [Route("full_list")]
+        public List<PokemonFull> listFull()
         {
-            return UserDB.updatePokemon(member);
+            return UserDB.listFull();
         }
 
+        [HttpPost]
+        [Route("full_list")]
+        public Task<Pokemon> GetPokemon()
+        {
+            return PokemonAPI.GetPokemon();
+        }
     }
 }
