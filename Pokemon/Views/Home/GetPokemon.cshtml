@@ -1,0 +1,33 @@
+﻿@using PokemonGP.Models
+@model PokemonAPIResponse
+@{
+   
+    ViewData["Title"] = "ViewArt";
+}
+
+<h1>ViewArt</h1>
+
+	
+		@Model.name<br />
+		@Model.weight<br />
+		@Model.height<br />
+		@Model.order<br />
+		@foreach (Stat stat in Model.stats)
+			{
+				@stat.stat.name<br />
+				@stat.base_stat<br /><br />
+
+				
+			}
+		@Model.stats[1].stat.name
+		@Model.stats[1].base_stat
+		@foreach (PType type in Model.types)
+			{
+				@type.type.name
+			}
+
+		@Model.types[0].type.name
+
+
+
+
