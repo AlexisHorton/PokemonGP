@@ -8,6 +8,8 @@ import { Pokemon } from './pokemonmembers';
 })
 export class UserAPIService {
 
+  currentUser: UserLogin | null = null;
+
   constructor(private http: HttpClient) { }
 
   AddUser(newUser: UserLogin, cb: any){
@@ -24,5 +26,9 @@ export class UserAPIService {
 
   listTeam(userid: number, cb: any){
     this.http.get<Pokemon[]>(`https://localhost:44347/userlogin/teamlist?id=${userid}`).subscribe(cb)
+  }
+
+  UpdateCurrentUser(user: UserLogin) {
+    this.currentUser = user;
   }
 }

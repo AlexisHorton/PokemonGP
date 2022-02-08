@@ -7285,19 +7285,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alexi\\.nuget\\packages\\": {}
+    "C:\\Users\\smisner\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alexi\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+      "projectUniqueName": "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
       "projectName": "PokemonGP",
-      "projectPath": "C:\\Users\\alexi\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
-      "packagesPath": "C:\\Users\\alexi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alexi\\source\\repos\\PokemonGP\\PokemonGP\\obj\\",
+      "projectPath": "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+      "packagesPath": "C:\\Users\\smisner\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\alexi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\smisner\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7305,7 +7309,9 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.masterspasportal.com/nuget": {},
+        "https://nuget.telerik.com/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {

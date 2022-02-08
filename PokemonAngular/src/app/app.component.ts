@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { UserLogin } from './user-login';
 import { UserLoginComponent } from './user-login/user-login.component';
 
 @Component({
@@ -8,4 +9,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
 })
 export class AppComponent {
   title = 'PokemonAngular';
+
+  addUser(user: UserLogin) {
+    alert("User added!")
+  }
 }
