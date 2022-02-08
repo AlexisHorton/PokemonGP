@@ -61,6 +61,16 @@ namespace PokemonGP.Models
             }
         }
 
+        public static UserLogin GetAUser(string username, string password)
+        {
+            UserLogin result = null;
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                result = ctx.UserStorage.Where(s => s.username == username && s.password == password).FirstOrDefault();
+                return result;
+            }
+        }
+
         public static UserLogin AddUser(UserLogin user)
         {
             using (PokemonContext ctx = new PokemonContext())

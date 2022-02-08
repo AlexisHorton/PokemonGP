@@ -32,7 +32,6 @@ namespace PokemonGP.Controllers
             return UserDB.deletePokemon(id);
         }
 
-
         [HttpGet]
         [Route("full_list")]
         public List<PokemonFull> listFull()

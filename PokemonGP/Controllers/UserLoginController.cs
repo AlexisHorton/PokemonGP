@@ -31,6 +31,13 @@ namespace PokemonGP.Controllers
         }
 
         [HttpGet]
+        [Route("currentuser")]
+        public UserLogin GetAUser(string username, string password)
+        {
+            return UserDB.GetAUser(username, password);
+        }
+
+        [HttpGet]
         [Route("teamlist")]
         public List<PokemonMembers> listTeam(int userID)
         {

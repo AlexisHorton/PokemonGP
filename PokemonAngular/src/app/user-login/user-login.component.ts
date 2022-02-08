@@ -8,6 +8,7 @@ import { UserLogin } from '../user-login';
 })
 export class UserLoginComponent implements OnInit {
 
+  showCreateButton: boolean = false;
 
   newUser: UserLogin = {
     id: 0,
@@ -26,6 +27,10 @@ export class UserLoginComponent implements OnInit {
     this.AddUser.emit(this.newUser)
     this.newUser.username = '';
     this.newUser.password = '';
+  }
+
+  signIn(){
+    
   }
 
 }
