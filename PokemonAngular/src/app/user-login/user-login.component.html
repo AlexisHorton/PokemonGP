@@ -1,6 +1,11 @@
 <div>
     <h1>Sign in</h1>
+    <p>Username: <input type="text" [(ngModel)]="loginUser" /> </p>
+    <p>Password: <input type="text" [(ngModel)]="loginPassword" /></p>
+    <button (click)="signIn()">Sign In</button> 
+
+    <p>No profile? Create one! </p>
     <p>Username: <input type="text" [(ngModel)]="newUser.username"/> </p>
     <p>Password: <input type="text" [(ngModel)]="newUser.password"/></p>
-    <button (click)="signIn()">Sign In</button>  <button (click)="addUser()">Create User!</button>
+    <p><button (click)="addUser()">Join the tribe!</button></p> 
 </div>
