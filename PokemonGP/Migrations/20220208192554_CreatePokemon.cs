@@ -2,7 +2,7 @@
 
 namespace PokemonGP.Migrations
 {
-    public partial class CreatePokemonDB : Migration
+    public partial class CreatePokemon : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

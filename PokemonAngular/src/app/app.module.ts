@@ -9,13 +9,15 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PokemonBattleComponent } from './pokemon-battle/pokemon-battle.component';
+import { StarterPokemonComponent } from './starter-pokemon/starter-pokemon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
     UserHomepageComponent,
-    PokemonBattleComponent
+    PokemonBattleComponent,
+    StarterPokemonComponent
   ],
   imports: [
     BrowserModule, 

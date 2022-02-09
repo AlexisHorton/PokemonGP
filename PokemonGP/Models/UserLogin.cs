@@ -61,6 +61,33 @@ namespace PokemonGP.Models
             }
         }
 
+        //public static UserLogin Login(UserLogin userlogin)
+        //{
+        //    using (PokemonContext ctx = new PokemonContext())
+        //    {
+        //        List<UserLogin> users = ctx.UserStorage.Where(s => s.username == userlogin.username && s.password == userlogin.password).ToList();
+        //        if (users.Count == 1)
+        //        {
+        //            return userlogin;
+        //        }
+        //        return null;
+
+        //    }
+
+        //}
+        public static UserLogin GetAUser(string username, string password)
+        {
+            UserLogin result = null;
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                result = ctx.UserStorage.Where(s => s.username == username && s.password == password).FirstOrDefault();
+                return result;
+            }
+        }
+
+
+
+
         public static UserLogin AddUser(UserLogin user)
         {
             using (PokemonContext ctx = new PokemonContext())

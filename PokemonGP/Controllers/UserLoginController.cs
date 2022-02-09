@@ -29,6 +29,12 @@ namespace PokemonGP.Controllers
         {
             return UserDB.GetUsers();
         }
+        [HttpGet]
+        [Route("{user}/{password}")]
+        public UserLogin GetAUser(string user, string password)
+        {
+            return UserDB.GetAUser(user, password);
+        }
 
         [HttpGet]
         [Route("teamlist")]
@@ -36,6 +42,7 @@ namespace PokemonGP.Controllers
         {
             return UserDB.listTeam(userID);
         }
+
 
         [HttpPut]
         public PokemonMembers updatePokemon(PokemonMembers member)

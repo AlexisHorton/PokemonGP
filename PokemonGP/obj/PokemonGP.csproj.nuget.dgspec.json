@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {}
+    "C:\\Users\\Dans-LT\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {
+    "C:\\Users\\Dans-LT\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+        "projectUniqueName": "C:\\Users\\Dans-LT\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
         "projectName": "PokemonGP",
-        "projectPath": "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
-        "packagesPath": "C:\\Users\\smisner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\smisner\\source\\repos\\PokemonGP\\PokemonGP\\obj\\",
+        "projectPath": "C:\\Users\\Dans-LT\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+        "packagesPath": "C:\\Users\\Dans-LT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dans-LT\\source\\repos\\PokemonGP\\PokemonGP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\smisner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dans-LT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,9 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.masterspasportal.com/nuget": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -76,6 +75,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.20, 3.1.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -84,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     }
