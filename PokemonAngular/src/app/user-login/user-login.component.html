@@ -4,8 +4,8 @@
     <p>Password: <input type="text" [(ngModel)]="loginPassword" /></p>
     <button (click)="signIn()">Sign In</button> 
 
-    <p>No profile? Create one! </p>
-    <ng-container>
+    <p>No profile? <button (click)="YesCreateButton()">Create one!</button> </p>
+    <ng-container *ngIf="showCreateButton">
     <p>Username: <input type="text" [(ngModel)]="newUser.username"/> </p>
     <p>Password: <input type="text" [(ngModel)]="newUser.password"/></p>
     <p><button (click)="addUser(newUser)">Join!</button></p> 

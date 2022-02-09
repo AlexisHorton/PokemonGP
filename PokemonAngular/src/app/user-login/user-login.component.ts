@@ -29,6 +29,11 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private userapi: UserAPIService, private Route: Router, private route: ActivatedRoute) { }
 
+  YesCreateButton(){
+    this.showCreateButton = true;
+  }
+
+
   ngOnInit(): void {
     // this.route.queryParams.subscribe(params=>{
     //   this.loginPassword = params['loginPassword'];
@@ -61,11 +66,13 @@ export class UserLoginComponent implements OnInit {
       (result: any) => {
         if (result) {
           alert(`Welcome! ${this.loginUser}`);
+          this.Route.navigate(["/userhomepage"])
         }
         else {
           alert('Sorry, that did not match');
         }
     })
+    
   }
 
 

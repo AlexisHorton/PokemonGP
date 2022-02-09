@@ -38,7 +38,7 @@ export class UserHomepageComponent implements OnInit {
   listTeam(userid:number){
     this.userapi.listTeam(
       userid, (result: any) => {
-        this.pokemonTeam = result;
+        this.pokemonTeam = result; 
       }
     )
   }
