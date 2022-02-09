@@ -25,8 +25,6 @@ export class UserLoginComponent implements OnInit {
   loginUser: string = '';
   loginPassword: string = '';
 
-  @Output() AddUser: EventEmitter<UserLogin> = new EventEmitter<UserLogin>();
-
   constructor(private userapi: UserAPIService, private Route: Router, private route: ActivatedRoute) { }
 
   YesCreateButton(){
