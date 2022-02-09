@@ -35,8 +35,7 @@ namespace PokemonGP.Models
 
     public class PokemonFull
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
         public string species { get; set; }
         public string main_sprite { get; set; }
         public int height { get; set; }
@@ -117,7 +116,7 @@ namespace PokemonGP.Models
             PokemonFull result = null;
             using (PokemonContext ctx = new PokemonContext())
             {
-                result = ctx.PokemonFullList.Where(s => s.ID == id).ToList()[0];
+                result = ctx.PokemonFullList.Where(s => s.id == id).ToList()[0];
             }
             return result;
         }

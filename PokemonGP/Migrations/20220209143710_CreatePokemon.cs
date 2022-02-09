@@ -2,7 +2,7 @@
 
 namespace PokemonGP.Migrations
 {
-    public partial class CreatePokemonDB : Migration
+    public partial class CreatePokemon : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,8 +10,7 @@ namespace PokemonGP.Migrations
                 name: "MemberStorage",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(nullable: false),
                     level = table.Column<int>(nullable: false),
                     experience = table.Column<int>(nullable: false),
                     userid = table.Column<int>(nullable: false),
@@ -29,15 +28,14 @@ namespace PokemonGP.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MemberStorage", x => x.id);
+                    table.PrimaryKey("PK_MemberStorage", x => new { x.id, x.userid });
                 });
 
             migrationBuilder.CreateTable(
                 name: "PokemonFullList",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(nullable: false),
                     species = table.Column<string>(nullable: true),
                     main_sprite = table.Column<string>(nullable: true),
                     height = table.Column<int>(nullable: false),
@@ -52,7 +50,6 @@ namespace PokemonGP.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonFullList", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(

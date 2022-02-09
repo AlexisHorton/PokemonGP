@@ -82,24 +82,23 @@ export class PokemonBattleComponent implements OnInit {
 		}
 	}
 
-	AttackEnemy() {
-		if (this.EnemyPokemon != null) {
-			let damage: number = Math.floor(((((2 * this.PlayerPokemonLevel) / 5) + 2) * this.PlayerPokemon.attack / this.EnemyPokemon.defense) + 2)
-			if (this.EnemyPokemon.current_hp - damage <= 0) {
-				this.EnemyPokemon.current_hp = 0;
-				setTimeout(() => this.EndBattle(), 1000)
+	PlayTurn() {
+		if (this.PlayerPokemon && this.EnemyPokemon) {
+			this.Attack(this.PlayerPokemon, this.EnemyPokemon, this.PlayerPokemonLevel)
+			if (this.inBattle) {
+				this.Attack(this.EnemyPokemon, this.PlayerPokemon, this.EnemyPokemonLevel)
 			}
-			else {
-				this.EnemyPokemon.current_hp -= damage
-				damage = Math.floor(((((2 * this.EnemyPokemonLevel) / 5) + 2) * this.EnemyPokemon.attack / this.PlayerPokemon.defense) + 2)
-				if (this.PlayerPokemon.current_hp - damage <= 0) {
-					this.PlayerPokemon.current_hp = 0;
-					setTimeout(() => this.EndBattle(), 1000)
-				}
-				else {
-					this.PlayerPokemon.current_hp -= damage
-				}
-			}
+		}
+	}
+
+	Attack(attacker: PokemonFull, target: PokemonFull, attackerLevel: number) {
+		let damage: number = Math.floor(((((2 * attackerLevel) / 5) + 2) * attacker.attack / target.defense) + 2)
+		if (target.current_hp - damage <= 0) {
+			target.current_hp = 0;
+			setTimeout(() => this.EndBattle(), 1000);
+		}
+		else {
+			target.current_hp -= damage;
 		}
 	}
 
