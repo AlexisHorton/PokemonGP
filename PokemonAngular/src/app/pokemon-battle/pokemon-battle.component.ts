@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 import { PokemonAPIService } from '../pokemon-api.service';
 import { PokemonFull } from '../pokemon-full'
 import { Pokemon } from '../pokemonmembers'
@@ -13,14 +14,31 @@ import { UserAPIService } from '../user-api.service';
 export class PokemonBattleComponent implements OnInit {
 
 	PlayerTeam: Pokemon[] = []
-	PlayerPokemon: PokemonFull | null = null;
+	PlayerPokemon: PokemonFull = {
+		id: 1,
+		species: 'bulbasaur',
+		main_sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+		height: 7,
+		weight: 69,
+		order: 1,
+		base_experience: 64,
+		maxhp: 45,
+		current_hp: 45,
+		attack: 49,
+		defense: 49,
+		type: 'grass',
+	};
 	EnemyPokemon: PokemonFull | null = null;
+
+	PlayerPokemonLevel: number = 5;
+	EnemyPokemonLevel: number = 0;
 
 	inBattle: boolean = false;
 
 	constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) { }
 
 	ngOnInit(): void {
+		this.ApplyLevelAdjust(this.PlayerPokemon, this.PlayerPokemonLevel);
 	}
 
 	RefreshTeam() {
@@ -44,6 +62,62 @@ export class PokemonBattleComponent implements OnInit {
 
 	Battle() {
 		this.inBattle = true;
-		alert(this.inBattle)
+		this.SetBattlePokemon();
+	}
+
+	GetRandomInt(max: number) {
+		let num: number = Math.floor((Math.random() * max) + 0.5)
+		return num
+	}
+
+	SetBattlePokemon() {
+		if (this.EnemyPokemon == null) {
+			this.pokemonapi.GetPokemonFull(10 + (this.GetRandomInt(3) * 3),
+				(result: PokemonFull) => {
+					this.EnemyPokemon = result;
+					this.ApplyLevelAdjust(this.EnemyPokemon, this.EnemyPokemonLevel)
+				}
+			)
+			this.EnemyPokemonLevel = this.PlayerPokemonLevel - 2;
+		}
+	}
+
+	AttackEnemy() {
+		if (this.EnemyPokemon != null) {
+			let damage: number = Math.floor(((((2 * this.PlayerPokemonLevel) / 5) + 2) * this.PlayerPokemon.attack / this.EnemyPokemon.defense) + 2)
+			if (this.EnemyPokemon.current_hp - damage <= 0) {
+				this.EnemyPokemon.current_hp = 0;
+				setTimeout(() => this.EndBattle(), 1000)
+			}
+			else {
+				this.EnemyPokemon.current_hp -= damage
+				damage = Math.floor(((((2 * this.EnemyPokemonLevel) / 5) + 2) * this.EnemyPokemon.attack / this.PlayerPokemon.defense) + 2)
+				if (this.PlayerPokemon.current_hp - damage <= 0) {
+					this.PlayerPokemon.current_hp = 0;
+					setTimeout(() => this.EndBattle(), 1000)
+				}
+				else {
+					this.PlayerPokemon.current_hp -= damage
+				}
+			}
+		}
+	}
+
+	EndBattle() {
+		this.inBattle = false;
+		this.EnemyPokemon = null;
+		alert("Battle finished!")
+	}
+
+	ApplyLevelAdjust(pokemon: PokemonFull, level: number){
+		pokemon.base_experience *= level
+		pokemon.maxhp = Math.floor(pokemon.maxhp * (1 + level/50))
+		pokemon.current_hp = Math.floor(pokemon.current_hp * (1 + level/50))
+		pokemon.attack = Math.floor(pokemon.attack * (1 + level/50))
+		pokemon.defense = Math.floor(pokemon.attack * (1 + level/50))
+	}
+
+	HealTeam() {
+		this.PlayerPokemon.current_hp = this.PlayerPokemon.maxhp
 	}
 }

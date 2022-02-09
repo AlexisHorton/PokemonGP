@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3be1c097-ea0d-4624-8d88-1addabe9c1bf": {
+      "ProjectGuid": "3be1c097-ea0d-4624-8d88-1addabe9c1bf",
+      "DisplayName": "PokemonGP",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

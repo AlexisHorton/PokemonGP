@@ -112,6 +112,16 @@ namespace PokemonGP.Models
             return result;
         }
 
+        public static PokemonFull GetPokemonFull(int id)
+        {
+            PokemonFull result = null;
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                result = ctx.PokemonFullList.Where(s => s.ID == id).ToList()[0];
+            }
+            return result;
+        }
+
         public static PokemonMembers addPokemon(PokemonMembers member)
         {
             using (PokemonContext ctx = new PokemonContext())
@@ -143,7 +153,6 @@ namespace PokemonGP.Models
                 return member;
             }
         }
-
     }
 
     public class PokemonContext : DbContext

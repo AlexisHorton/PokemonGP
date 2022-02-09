@@ -40,6 +40,13 @@ namespace PokemonGP.Controllers
             return UserDB.listFull();
         }
 
+        [HttpGet]
+        [Route("single")]
+        public PokemonFull GetPokemonFull(int id)
+        {
+            return UserDB.GetPokemonFull(id);
+        }
+
         [HttpPost]
         [Route("full_list")]
         public Task<Pokemon> GetPokemon()

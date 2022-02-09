@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4c3425c8-d31e-4c3c-b949-c7e7c9660724": {
+      "ProjectGuid": "4c3425c8-d31e-4c3c-b949-c7e7c9660724",
+      "DisplayName": "PokemonApp",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
