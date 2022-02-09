@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'userlogin', component: UserLoginComponent },
   { path: '', component: AppComponent},
   { path: 'home', component: HomePageComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: AppComponent  }
 
 ];

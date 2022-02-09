@@ -5,7 +5,9 @@
     <button (click)="signIn()">Sign In</button> 
 
     <p>No profile? Create one! </p>
+    <ng-container>
     <p>Username: <input type="text" [(ngModel)]="newUser.username"/> </p>
     <p>Password: <input type="text" [(ngModel)]="newUser.password"/></p>
-    <p><button (click)="addUser()">Join the tribe!</button></p> 
+    <p><button (click)="addUser(newUser)">Join!</button></p> 
+    </ng-container>
 </div>
