@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAPIService } from '../user-api.service';
+import { UserLogin } from '../user-login';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  allUsers: UserLogin[] = [];
+
+  constructor(private userapi: UserAPIService) { }
 
   ngOnInit(): void {
+    this.refreshUserList();
+  }
+
+  refreshUserList(){
+    this.userapi.GetUsers(
+      (results: any) => {
+        this.allUsers = results;
+      }
+    )
   }
 
 }

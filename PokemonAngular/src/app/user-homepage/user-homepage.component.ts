@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PokemonFull } from '../pokemon-full';
+import { Pokemon } from '../pokemonmembers';
+import { UserAPIService } from '../user-api.service';
+import { UserLogin } from '../user-login';
 
 @Component({
   selector: 'app-user-homepage',
@@ -7,9 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHomepageComponent implements OnInit {
 
-  constructor() { }
+  allUsers: UserLogin[] = [];
+  pokemonTeam: Pokemon[] = [];
+
+  constructor(private userapi: UserAPIService) { }
 
   ngOnInit(): void {
+  }
+
+  refreshUserList(){
+    this.userapi.GetUsers(
+      (results: any) => {
+        this.allUsers = results;
+      }
+    )
+  }
+
+  deleteUser(id: number){
+    this.userapi.DeleteUser(
+      id, () => {
+        this.refreshUserList();
+      }
+    )
+  }
+
+  listTeam(userid:number){
+    this.userapi.listTeam(
+      userid, (result: any) => {
+        this.pokemonTeam = result;
+      }
+    )
   }
 
 }
