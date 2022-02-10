@@ -13,7 +13,6 @@ namespace PokemonGP.Models
         public int id { get; set; }
         public string name { get; set; }
         public int base_experience { get; set; }
-        public int order { get; set; }
         public Species species { get; set; }
         public Sprites sprites { get; set; }
         public List<Stat> stats { get; set; }
