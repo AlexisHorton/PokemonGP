@@ -1,15 +1,20 @@
-<h1>Your PokeDex: </h1> 
+<h1>Your PokeDex: {{currentuserID}} </h1> 
 <ng-container *ngFor="let pokemon of poketeam">
     <ng-container *ngIf="pokemon.id == selected">
 <table width=100%; style=" float: left; border: black;" align="center">
     <thead>
             <tr>
                <td align="center">
-                   <img src="{{pokemon.main_sprite}}"><br>
-                   # {{pokemon.id}}
+                   <div *ngFor="let pokemon2 of pokefull">
+                    <div *ngIf="pokemon.pokemonid == pokemon2.id">
+                   <img src="{{pokemon2.main_sprite}}"><br>
+                   # {{pokemon.id}}<br>
+                   {{pokemon2.species}}
+                </div>
+                </div>
                </td>
                <td>
-                {{pokemon.given_name}} - {{pokemon.species}}<br>
+                {{pokemon.given_name}}<br>
                 Lvl.{{pokemon.level}}   &nbsp;   &nbsp;      XP: {{pokemon.experience}}<br><br>
                 Team Position: {{pokemon.teampos}}<br>
                 <input type="number" [(ngModel)]="tposition">
@@ -17,9 +22,6 @@
                 
                </td>
                <td>
-                HP:      {{pokemon.maxhp}}<br>
-                Attack:  {{pokemon.attack}}<br>
-                Defense: {{pokemon.defense}}<br>
                 <button (click)="deletePokemon(pokemon.id)">Release</button>
                </td>
            </tr>
@@ -34,12 +36,15 @@
                  <thead>
                          <tr>
                             <td align="center">
-                                <img src="{{pokemon.main_sprite}}"><br>
+                                <div *ngFor="let pokemon2 of pokefull">
+                                    <div *ngIf="pokemon.pokemonid == pokemon2.id">
+                                <img src="{{pokemon2.main_sprite}}"><br>
                                 {{pokemon.given_name}}<br>
-                                # {{pokemon.id}}<br>
-                                {{pokemon.species}}<br>
+                                # {{pokemon.pokemonid}}<br>
+                                {{pokemon2.species}}<br>
                                 Lvl.{{pokemon.level}}
                                 <button (click)="lookAtThis(pokemon.id)">more info</button>
+                                </div></div>
                             </td>
                         </tr>
                 </thead>

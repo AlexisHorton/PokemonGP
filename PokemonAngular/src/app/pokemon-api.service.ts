@@ -10,7 +10,7 @@ export class PokemonAPIService {
 
   constructor(private http: HttpClient) { }
 
-  listMembers(currentUser: string, cb: any ){
+  listMembers(userID: number, cb: any ){
     this.http.get<Pokemon[]>('https://localhost:5001/pokemon').subscribe(cb)
   }
 
@@ -24,6 +24,9 @@ export class PokemonAPIService {
 
   GetPokemon(cb: any){
     this.http.get<PokemonFull[]>('https://localhost:5001/pokemon/full_list').subscribe(cb)
+  }
+  GetPokemonFull(id: number, cb: any){
+    this.http.get<PokemonFull>(`https://localhost:5001/pokemon/single?id=${id}`).subscribe(cb)
   }
   updatePokemon(editMember: Pokemon, cb: any){
     this.http.put('https://localhost:5001/pokemon', editMember).subscribe(cb)

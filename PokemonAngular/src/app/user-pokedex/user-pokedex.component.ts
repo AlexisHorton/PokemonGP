@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Pokemon } from '../pokemonmembers';
 import { PokemonAPIService } from '../pokemon-api.service';
 import { UserAPIService } from '../user-api.service';
+import { PokemonFull } from '../pokemon-full';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class UserPokedexComponent implements OnInit {
 
   moreinfo: boolean = false;
   poketeam: Pokemon[] = [];
+  pokefull: PokemonFull[] = [];
   selected: number | null = null;
   @Input() currentuserID = this.userapi.currentUserID;
   @Input() tposition: number = 0;
@@ -20,20 +22,13 @@ export class UserPokedexComponent implements OnInit {
 
   editmon: Pokemon = {
     id: 0,
+    pokemonid: 0,
     level: 1,
     experience: 0,
     userid: 0,
     teampos: 0,
     given_name: '',
-    species: '',
-    main_sprite: '',
-    order: 0,
-    base_experience: 0,
-    maxhp: 0,
-    current_hp: 0,
-    attack: 0,
-    defense: 0,
-    type: ''
+    current_hitpoints: 0
   }
 
   constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) { 
@@ -43,7 +38,7 @@ export class UserPokedexComponent implements OnInit {
   ngOnInit(): void {
   }
   refreshList() {
-    this.pokemonapi.listMembers( this.userapi.currentUser, 
+    this.pokemonapi.listMembers( this.userapi.currentUserID, 
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);
@@ -70,14 +65,6 @@ export class UserPokedexComponent implements OnInit {
     this.editmon.userid = this.poketeam[id - 1].userid;
     this.editmon.teampos = this.tposition;
     this.editmon.given_name = this.poketeam[id - 1].given_name;
-    this.editmon.species = this.poketeam[id - 1].species;
-    this.editmon.main_sprite = this.poketeam[id - 1].main_sprite;
-    this.editmon.order = this.poketeam[id - 1].order;
-    this.editmon.maxhp = this.poketeam[id - 1].maxhp;
-    this.editmon.current_hp = this.poketeam[id - 1].maxhp;
-    this.editmon.attack = this.poketeam[id - 1].attack;
-    this.editmon.defense = this.poketeam[id - 1].defense;
-    this.editmon.type = this.poketeam[id - 1].type;
 
     this.pokemonapi.updatePokemon(this.editmon,
       () => {

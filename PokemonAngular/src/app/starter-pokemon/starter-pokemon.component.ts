@@ -22,20 +22,13 @@ export class StarterPokemonComponent implements OnInit {
 
   newmon: Pokemon = {
     id: 0,
+    pokemonid: 0,
+    userid: this.userapi.currentUserID,
     level: 1,
     experience: 0,
-    userid: this.userapi.currentUserID,
+    current_hitpoints: 0,
     teampos: 0,
-    given_name: '',
-    species: '',
-    main_sprite: '',
-    order: 0,
-    base_experience: 0,
-    maxhp: 0,
-    current_hp: 0,
-    attack: 0,
-    defense: 0,
-    type: ''
+    given_name: ''
   }
   
   @Input() pokemon: PokemonFull | undefined = undefined;
@@ -64,15 +57,7 @@ export class StarterPokemonComponent implements OnInit {
   }
 
   addMember(id : number) {
-    this.newmon.species = this.pokemons[id - 1].species;
-    this.newmon.main_sprite = this.pokemons[id - 1].main_sprite;
-    this.newmon.order = this.pokemons[id - 1].order;
-    this.newmon.base_experience = this.pokemons[id - 1].base_experience;
-    this.newmon.maxhp = this.pokemons[id - 1].maxhp;
-    this.newmon.current_hp = this.pokemons[id - 1].maxhp;
-    this.newmon.attack = this.pokemons[id - 1].attack;
-    this.newmon.defense = this.pokemons[id - 1].defense;
-    this.newmon.type = this.pokemons[id - 1].type;
+    this.newmon.pokemonid = this.pokemons[id - 1].id;
 
     this.pokemonapi.addPokemon(this.newmon, 
       () => {

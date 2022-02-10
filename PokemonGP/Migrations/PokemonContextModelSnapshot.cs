@@ -20,7 +20,7 @@ namespace PokemonGP.Migrations
 
             modelBuilder.Entity("PokemonGP.Models.PokemonFull", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -31,20 +31,17 @@ namespace PokemonGP.Migrations
                     b.Property<int>("base_experience")
                         .HasColumnType("int");
 
-                    b.Property<int>("current_hp")
-                        .HasColumnType("int");
-
                     b.Property<int>("defense")
                         .HasColumnType("int");
 
                     b.Property<int>("height")
                         .HasColumnType("int");
 
+                    b.Property<int>("hitpoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("main_sprite")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("maxhp")
-                        .HasColumnType("int");
 
                     b.Property<int>("order")
                         .HasColumnType("int");
@@ -58,7 +55,7 @@ namespace PokemonGP.Migrations
                     b.Property<int>("weight")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("id");
 
                     b.ToTable("PokemonFullList");
                 });
@@ -70,16 +67,7 @@ namespace PokemonGP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("attack")
-                        .HasColumnType("int");
-
-                    b.Property<int>("base_experience")
-                        .HasColumnType("int");
-
-                    b.Property<int>("current_hp")
-                        .HasColumnType("int");
-
-                    b.Property<int>("defense")
+                    b.Property<int>("current_hitpoints")
                         .HasColumnType("int");
 
                     b.Property<int>("experience")
@@ -91,23 +79,11 @@ namespace PokemonGP.Migrations
                     b.Property<int>("level")
                         .HasColumnType("int");
 
-                    b.Property<string>("main_sprite")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("maxhp")
+                    b.Property<int>("pokemonid")
                         .HasColumnType("int");
-
-                    b.Property<int>("order")
-                        .HasColumnType("int");
-
-                    b.Property<string>("species")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("teampos")
                         .HasColumnType("int");
-
-                    b.Property<string>("type")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("userid")
                         .HasColumnType("int");

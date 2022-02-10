@@ -1,19 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AppComponent } from './app.component';
-import { PokemonBattleComponent } from './pokemon-battle/pokemon-battle.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
-  { path: 'userlogin', component: UserHomepageComponent},
-  { path: 'battle', component: PokemonBattleComponent}
+  { path: 'userlogin', component: UserLoginComponent },
+  { path: '', component: AppComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'userhomepage', component: UserHomepageComponent },
+  { path: '**', component: AppComponent  }
+
 ];
 
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes), 
+    CommonModule
   ],
   exports: [RouterModule]
 })

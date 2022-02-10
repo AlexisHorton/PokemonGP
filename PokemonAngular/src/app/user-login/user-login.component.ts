@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserAPIService } from '../user-api.service';
 import { UserLogin } from '../user-login';
 
 @Component({
@@ -8,6 +10,11 @@ import { UserLogin } from '../user-login';
 })
 export class UserLoginComponent implements OnInit {
 
+  showCreateButton: boolean = false;
+  redirectUrl: any = 'http://localhost:4200/home';
+  token: any;
+
+  allUsers: UserLogin[] = [];
 
   newUser: UserLogin = {
     id: 0,
@@ -15,17 +22,56 @@ export class UserLoginComponent implements OnInit {
     password: ''
   }
 
-  @Output() AddUser: EventEmitter<UserLogin> = new EventEmitter<UserLogin>();
+  loginUser: string = '';
+  loginPassword: string = '';
 
-  constructor() { }
+  constructor(private userapi: UserAPIService, private Route: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  YesCreateButton(){
+    this.showCreateButton = true;
   }
 
-  addUser(){
-    this.AddUser.emit(this.newUser)
+
+  ngOnInit(): void {
+    // this.route.queryParams.subscribe(params=>{
+    //   this.loginPassword = params['loginPassword'];
+    //   this.loginUser = params['loginUser'];
+    //   this.redirectUrl = params['next'];
+    // })
+    this.refreshUserList();
+  }
+
+  refreshUserList(){
+    this.userapi.GetUsers(
+      (results: any) => {
+        this.allUsers = results;
+      }
+    )
+  }
+
+  addUser(newUser: UserLogin){
+    this.userapi.AddUser(newUser,
+      () => {
+        this.refreshUserList();
+      })
+    alert("User added!")
     this.newUser.username = '';
     this.newUser.password = '';
   }
+
+  signIn(){
+    this.userapi.GetAUser(this.loginUser, this.loginPassword, 
+      (result: any) => {
+        if (result) {
+          alert(`Welcome! ${this.loginUser}`);
+          this.Route.navigate(["/userhomepage"])
+        }
+        else {
+          alert('Sorry, that did not match');
+        }
+    })
+    
+  }
+
 
 }
