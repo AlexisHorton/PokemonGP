@@ -36,11 +36,5 @@ namespace PokemonGP.Controllers
         {
             return UserDB.listTeam(userID);
         }
-
-        [HttpPut]
-        public PokemonMembers updatePokemon(PokemonMembers member)
-        {
-            return UserDB.updatePokemon(member);
-        }
     }
 }

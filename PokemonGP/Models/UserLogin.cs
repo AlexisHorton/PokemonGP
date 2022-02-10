@@ -17,20 +17,13 @@ namespace PokemonGP.Models
     public class PokemonMembers
     {
         public int id { get; set; }
+        public int pokemonid { get; set; }
+        public int userid { get; set; }
         public int level { get; set; }
         public int experience { get; set; }
-        public int userid { get; set; }
+        public int current_hitpoints { get; set; }
         public int teampos { get; set; }
         public string given_name { get; set; }
-        public string species { get; set; }
-        public string main_sprite { get; set; }
-        public int order { get; set; }
-        public int base_experience { get; set; }
-        public int maxhp { get; set; }
-        public int current_hp { get; set; }
-        public int attack { get; set; }
-        public int defense { get; set; }
-        public string type { get; set; }
     }
 
     public class PokemonFull
@@ -40,10 +33,8 @@ namespace PokemonGP.Models
         public string main_sprite { get; set; }
         public int height { get; set; }
         public int weight { get; set; }
-        public int order { get; set; }
         public int base_experience { get; set; }
-        public int maxhp { get; set; }
-        public int current_hp { get; set; }
+        public int hitpoints { get; set; }
         public int attack { get; set; }
         public int defense { get; set; }
         public string type { get; set; }
@@ -116,7 +107,7 @@ namespace PokemonGP.Models
             PokemonFull result = null;
             using (PokemonContext ctx = new PokemonContext())
             {
-                result = ctx.PokemonFullList.Where(s => s.id == id).ToList()[0];
+                result = ctx.PokemonFullList.Where(s => s.id == id).FirstOrDefault();
             }
             return result;
         }
@@ -175,20 +166,19 @@ namespace PokemonGP.Models
         {
             using (PokemonContext ctx = new PokemonContext())
             {
-                List<PokemonFull> full = ctx.PokemonFullList.Where(s => s.order == monster.order).ToList();
+                List<PokemonFull> full = ctx.PokemonFullList.Where(s => s.id == monster.id).ToList();
                 if (full.Count > 0)
                 {
                     return false;
                 }
                 PokemonFull newmon = new PokemonFull();
+                newmon.id = monster.id;
                 newmon.species = monster.species.name;
                 newmon.main_sprite = monster.sprites.front_default;
                 newmon.height = monster.height;
                 newmon.weight = monster.weight;
-                newmon.order = monster.order;
                 newmon.base_experience = monster.base_experience;
-                newmon.maxhp = monster.stats[0].base_stat;
-                newmon.current_hp = monster.stats[0].base_stat;
+                newmon.hitpoints = monster.stats[0].base_stat;
                 newmon.attack = monster.stats[1].base_stat;
                 newmon.defense = monster.stats[2].base_stat;
                 newmon.type = monster.types[0].type.name;

@@ -53,5 +53,11 @@ namespace PokemonGP.Controllers
         {
             return PokemonAPI.GetPokemon();
         }
+
+        [HttpPut]
+        public PokemonMembers updatePokemon(PokemonMembers member)
+        {
+            return UserDB.updatePokemon(member);
+        }
     }
 }
