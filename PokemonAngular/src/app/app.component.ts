@@ -10,6 +10,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 export class AppComponent {
   title = 'PokemonAngular';
 
+
   addUser(user: UserLogin) {
     alert("User added!")
   }

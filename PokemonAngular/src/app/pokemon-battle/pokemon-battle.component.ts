@@ -34,8 +34,8 @@ export class PokemonBattleComponent implements OnInit {
 	}
 
 	GetUserID() {
-		if (this.userapi.currentUser) {
-			return this.userapi.currentUser.id
+		if (this.userapi.current_User) {
+			return this.userapi.current_User.id
 		}
 		else {
 			return 0

@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Pokemon } from '../pokemonmembers';
 import { PokemonFull } from '../pokemon-full';
 import { PokemonAPIService } from '../pokemon-api.service';
+import { UserAPIService } from '../user-api.service';
+import { UserPokedexComponent } from '../user-pokedex/user-pokedex.component';
+
 
 
 @Component({
@@ -13,14 +16,15 @@ export class StarterPokemonComponent implements OnInit {
 
   pokemons: PokemonFull[] = [];
   PickThisOne: boolean = false;
-  Taken: number =0;
+  Taken: number = 0;
   ToBeTaken: number = 2;
+  choice1: number | null = null;
 
   newmon: Pokemon = {
     id: 0,
     level: 1,
     experience: 0,
-    userid: 0,
+    userid: this.userapi.currentUserID,
     teampos: 0,
     given_name: '',
     species: '',
@@ -37,7 +41,7 @@ export class StarterPokemonComponent implements OnInit {
   @Input() pokemon: PokemonFull | undefined = undefined;
   @Output() addmember: EventEmitter<Pokemon> = new EventEmitter<Pokemon>();
 
-  constructor(private pokemonapi: PokemonAPIService) { 
+  constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) { 
     this.refreshList();
   }
 
@@ -76,5 +80,12 @@ export class StarterPokemonComponent implements OnInit {
     });
       this.hideNaming();
       this.Taken += 1;
+      if (this.choice1 == null)
+      {
+        this.choice1 = this.pokemons[id -1].id;
+      }
+      
   }
+  
+
 }

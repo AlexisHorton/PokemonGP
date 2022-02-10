@@ -5,7 +5,7 @@
     <table><tr><td>
 <ng-container *ngFor="let pokemon of pokemons">
     <ng-container  *ngIf="pokemon.id == 1 || pokemon.id == 4 || pokemon.id == 7 || pokemon.id == 25">
-        
+        <ng-container *ngIf="pokemon.id != choice1">
     <table width=100; style=" float: left; border: black;" align="center">
         <thead>
             <tr>
@@ -21,6 +21,8 @@
             </tr>
         </thead>
     </table>
+    
+</ng-container>
 </ng-container>
 </ng-container>
 </td></tr><tr><td>

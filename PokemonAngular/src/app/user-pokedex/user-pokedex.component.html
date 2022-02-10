@@ -1,0 +1,48 @@
+<h1>Your PokeDex: </h1> 
+<ng-container *ngFor="let pokemon of poketeam">
+    <ng-container *ngIf="pokemon.id == selected">
+<table width=100%; style=" float: left; border: black;" align="center">
+    <thead>
+            <tr>
+               <td align="center">
+                   <img src="{{pokemon.main_sprite}}"><br>
+                   # {{pokemon.id}}
+               </td>
+               <td>
+                {{pokemon.given_name}} - {{pokemon.species}}<br>
+                Lvl.{{pokemon.level}}   &nbsp;   &nbsp;      XP: {{pokemon.experience}}<br><br>
+                Team Position: {{pokemon.teampos}}<br>
+                <input type="number" [(ngModel)]="tposition">
+                <button (click)="editPokemon(pokemon.id)">Change Position</button>
+                
+               </td>
+               <td>
+                HP:      {{pokemon.maxhp}}<br>
+                Attack:  {{pokemon.attack}}<br>
+                Defense: {{pokemon.defense}}<br>
+                <button (click)="deletePokemon(pokemon.id)">Release</button>
+               </td>
+           </tr>
+   </thead>
+</table>
+</ng-container>
+</ng-container>
+<br>
+<ng-container *ngFor="let pokemon of poketeam">
+    <ng-container *ngIf="pokemon.userid == currentuserID">
+            <table width=100; style=" float: left; border: black;" align="center">
+                 <thead>
+                         <tr>
+                            <td align="center">
+                                <img src="{{pokemon.main_sprite}}"><br>
+                                {{pokemon.given_name}}<br>
+                                # {{pokemon.id}}<br>
+                                {{pokemon.species}}<br>
+                                Lvl.{{pokemon.level}}
+                                <button (click)="lookAtThis(pokemon.id)">more info</button>
+                            </td>
+                        </tr>
+                </thead>
+            </table>
+        </ng-container>
+    </ng-container>

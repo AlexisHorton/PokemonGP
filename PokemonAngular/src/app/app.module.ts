@@ -10,6 +10,7 @@ import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PokemonBattleComponent } from './pokemon-battle/pokemon-battle.component';
 import { StarterPokemonComponent } from './starter-pokemon/starter-pokemon.component';
+import { UserPokedexComponent } from './user-pokedex/user-pokedex.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { StarterPokemonComponent } from './starter-pokemon/starter-pokemon.compo
     UserLoginComponent,
     UserHomepageComponent,
     PokemonBattleComponent,
-    StarterPokemonComponent
+    StarterPokemonComponent,
+    UserPokedexComponent
   ],
   imports: [
     BrowserModule, 
