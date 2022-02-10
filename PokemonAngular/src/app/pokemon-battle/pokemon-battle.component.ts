@@ -39,8 +39,16 @@ export class PokemonBattleComponent implements OnInit {
 		if (this.GetUserID() > 0) {
 			this.userapi.listTeam(this.GetUserID(),
 				(result: Pokemon[]) => {
-					console.log(result)
 					this.PlayerTeam = result;
+					let pokemon: Pokemon | null = this.GetStarter()
+					if (pokemon) {
+						let pokemonFull: PokemonFull;
+						this.GetPokemonFull(pokemon.pokemonid, (result: PokemonFull) => {
+							if (pokemon) {
+								this.PlayerPokemon = this.CreateBattlePokemonProfile(result, pokemon.level, true)
+							}
+						});
+					}
 				}
 			)
 		}
@@ -53,7 +61,7 @@ export class PokemonBattleComponent implements OnInit {
 
 	GetPlayerPokemonHitpoints(id: number) {
 		for (let i = 0; i < this.PlayerTeam.length; i++) {
-			if (this.PlayerTeam[i].id = id) {
+			if (this.PlayerTeam[i].pokemonid = id) {
 				return this.PlayerTeam[i].current_hitpoints;
 			}
 		}
@@ -101,8 +109,9 @@ export class PokemonBattleComponent implements OnInit {
 		this.inBattle = true;
 		let playerPokemon: Pokemon | null = this.GetStarter()
 		if (playerPokemon) {
-			this.GetPokemonFull(playerPokemon.id, (result: PokemonFull) => {
-				let pokemonFull: PokemonFull = result
+			this.GetPokemonFull(playerPokemon.pokemonid, (playerResult: PokemonFull) => {
+				let pokemonFull: PokemonFull = playerResult
+				console.log(playerResult)
 				if (pokemonFull) {
 					this.PlayerPokemon = this.CreateBattlePokemonProfile(pokemonFull, playerPokemon?.level, true);
 				}
@@ -167,13 +176,23 @@ export class PokemonBattleComponent implements OnInit {
 									}
 								} while (savePokemon.experience > 100)
 							}
-							
+							else {
+								savePokemon.current_hitpoints = 0
+							}
 							this.pokemonapi.updatePokemon(savePokemon, () => {})
-							this.RefreshTeam()
 							this.EnemyPokemon = null;
 						}
 					});
 				}
+			});
+		}
+	}
+
+	HealTeam() {
+		for (let i = 0; i < this.PlayerTeam.length; i++) {
+			this.GetPokemonFull(this.PlayerTeam[i].pokemonid, (result: PokemonFull) => {
+				this.PlayerTeam[i].current_hitpoints = Math.floor(result.hitpoints * (1 + (this.PlayerTeam[i].level / 50)))
+				this.pokemonapi.updatePokemon(this.PlayerTeam[i], () => {});
 			});
 		}
 	}

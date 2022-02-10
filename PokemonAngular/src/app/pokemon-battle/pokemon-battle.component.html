@@ -1,13 +1,12 @@
-<div *ngIf="GetUserID() > 0 && PlayerTeam.length > 0">
-    <div *ngIf="!inBattle">
-        <button (click)="Battle()">Battle!</button> <br />
-    </div>
-    <div *ngIf="inBattle">
-        {{ EnemyPokemon?.species }} {{ EnemyPokemon?.level }}<br />
-        {{ EnemyPokemon?.current_hitpoints }} / {{ EnemyPokemon?.hitpoints }}<br /><br />
-        {{ PlayerPokemon?.species }} {{ PlayerPokemon?.level }}<br />
-        {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
-        <button (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
-        <button (click)="EndBattle(false)">Run away!</button>
-    </div>
+<div *ngIf="!inBattle">
+    <button (click)="Battle()">Battle!</button> <br />
+    <button (click)="HealTeam()">Heal Pokemon!</button>
+</div>
+<div *ngIf="inBattle">
+    {{ EnemyPokemon?.species }} {{ EnemyPokemon?.level }}<br />
+    {{ EnemyPokemon?.current_hitpoints }} / {{ EnemyPokemon?.hitpoints }}<br /><br />
+    {{ PlayerPokemon?.species }} {{ PlayerPokemon?.level }}<br />
+    {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
+    <button (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
+    <button (click)="EndBattle(false)">Run away!</button>
 </div>
