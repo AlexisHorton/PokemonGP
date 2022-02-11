@@ -3,8 +3,10 @@
     <button (click)="HealTeam()">Heal Pokemon!</button>
 </div>
 <div *ngIf="inBattle">
+    <img src="{{ EnemyPokemonImage }}"><br />
     {{ EnemyPokemon?.species }} {{ EnemyPokemon?.level }}<br />
     {{ EnemyPokemon?.current_hitpoints }} / {{ EnemyPokemon?.hitpoints }}<br /><br />
+    <img src="{{ PlayerPokemonImage }}"><br />
     {{ PlayerPokemon?.species }} {{ PlayerPokemon?.level }}<br />
     {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
     <button (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
