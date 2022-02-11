@@ -31,7 +31,7 @@
 </ng-container>
 <br>
 <ng-container *ngFor="let pokemon of poketeam">
-    <ng-container *ngIf="pokemon.userid == currentUserID">
+    <ng-container *ngIf="pokemon.userid == currentUserID">             /* data flow to template from class   */
             <table width=100; style=" float: left; border: black;" align="center">
                  <thead>
                          <tr>
