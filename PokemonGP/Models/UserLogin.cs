@@ -51,13 +51,13 @@ namespace PokemonGP.Models
             }
         }
 
-        public static bool GetAUser(string username, string password)
+        public static UserLogin GetAUser(string username, string password)
         {
             UserLogin result = null;
             using (PokemonContext ctx = new PokemonContext())
             {
                 result = ctx.UserStorage.Where(s => s.username == username && s.password == password).FirstOrDefault();
-                return (result != null);
+                return result;
             }
         }
 

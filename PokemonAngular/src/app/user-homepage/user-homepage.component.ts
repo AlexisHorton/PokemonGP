@@ -14,6 +14,10 @@ export class UserHomepageComponent implements OnInit {
   allUsers: UserLogin[] = [];
   pokemonTeam: Pokemon[] = [];
 
+  currentUser: string = '';
+  currentUserID: number = 0;
+  current_User: UserLogin | null = null;
+
   constructor(private userapi: UserAPIService) { }
 
   ngOnInit(): void {

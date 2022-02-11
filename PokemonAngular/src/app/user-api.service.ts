@@ -10,6 +10,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
 export class UserAPIService {
 
   currentUser: string = '';
+  currentUserID: number = 0;
+  current_User: UserLogin | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -26,10 +28,11 @@ export class UserAPIService {
   }
 
   GetAUser(username: string, password: string, cb:any){
-    this.http.get<boolean>(`https://localhost:44347/userlogin/${username}/${password}`).subscribe(
+    this.http.get<UserLogin>(`https://localhost:44347/userlogin/${username}/${password}`).subscribe(
       (result) => {
-        if (result == true){
+        if (result.username == username && result.password == password){
           this.currentUser = username;
+          this.currentUserID = result.id;
           cb(true);
         }
         else {

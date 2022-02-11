@@ -11,7 +11,7 @@ import { UserLogin } from '../user-login';
 export class UserLoginComponent implements OnInit {
 
   showCreateButton: boolean = false;
-  redirectUrl: any = 'http://localhost:4200/home';
+  redirectUrl = 'http://localhost:4200/home';
   token: any;
 
   allUsers: UserLogin[] = [];
@@ -33,11 +33,6 @@ export class UserLoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.route.queryParams.subscribe(params=>{
-    //   this.loginPassword = params['loginPassword'];
-    //   this.loginUser = params['loginUser'];
-    //   this.redirectUrl = params['next'];
-    // })
     this.refreshUserList();
   }
 
