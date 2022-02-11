@@ -1,0 +1,53 @@
+<h1>Your PokeDex: {{currentuserID}} </h1> 
+<ng-container *ngFor="let pokemon of poketeam">
+    <ng-container *ngIf="pokemon.id == selected">
+<table width=100%; style=" float: left; border: black;" align="center">
+    <thead>
+            <tr>
+               <td align="center">
+                   <div *ngFor="let pokemon2 of pokefull">
+                    <div *ngIf="pokemon.pokemonid == pokemon2.id">
+                   <img src="{{pokemon2.main_sprite}}"><br>
+                   # {{pokemon.id}}<br>
+                   {{pokemon2.species}}
+                </div>
+                </div>
+               </td>
+               <td>
+                {{pokemon.given_name}}<br>
+                Lvl.{{pokemon.level}}   &nbsp;   &nbsp;      XP: {{pokemon.experience}}<br><br>
+                Team Position: {{pokemon.teampos}}<br>
+                <input type="number" [(ngModel)]="tposition">
+                <button (click)="editPokemon(pokemon.id)">Change Position</button>
+                
+               </td>
+               <td>
+                <button (click)="deletePokemon(pokemon.id)">Release</button>
+               </td>
+           </tr>
+   </thead>
+</table>
+</ng-container>
+</ng-container>
+<br>
+<ng-container *ngFor="let pokemon of poketeam">
+    <ng-container *ngIf="pokemon.userid == currentuserID">
+            <table width=100; style=" float: left; border: black;" align="center">
+                 <thead>
+                         <tr>
+                            <td align="center">
+                                <div *ngFor="let pokemon2 of pokefull">
+                                    <div *ngIf="pokemon.pokemonid == pokemon2.id">
+                                <img src="{{pokemon2.main_sprite}}"><br>
+                                {{pokemon.given_name}}<br>
+                                # {{pokemon.pokemonid}}<br>
+                                {{pokemon2.species}}<br>
+                                Lvl.{{pokemon.level}}
+                                <button (click)="lookAtThis(pokemon.id)">more info</button>
+                                </div></div>
+                            </td>
+                        </tr>
+                </thead>
+            </table>
+        </ng-container>
+    </ng-container>

@@ -25,4 +25,8 @@ export class PokemonAPIService {
   GetPokemon(cb: any){
     this.http.get<PokemonFull[]>('https://localhost:44347/userlogin/full_list').subscribe(cb)
   }
+
+  updatePokemon(editMember: Pokemon, cb: any){
+    this.http.put('https://localhost:44347/pokemon', editMember).subscribe(cb)
+  }
 }

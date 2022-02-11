@@ -8,13 +8,15 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
+import { UserPokedexComponent } from './user-pokedex/user-pokedex.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
     UserHomepageComponent,
-    HomePageComponent
+    HomePageComponent,
+    UserPokedexComponent
   ],
   imports: [
     BrowserModule, 

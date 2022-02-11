@@ -45,4 +45,8 @@ export class UserAPIService {
   listTeam(userid: number, cb: any){
     this.http.get<Pokemon[]>(`https://localhost:44347/userlogin/teamlist?id=${userid}`).subscribe(cb)
   }
+
+  UpdateCurrentUser(user: UserLogin) {
+		this.current_User = user;
+	}
 }
