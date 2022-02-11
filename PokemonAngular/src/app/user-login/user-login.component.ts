@@ -25,6 +25,7 @@ export class UserLoginComponent implements OnInit {
   loginUser: string = '';
   loginPassword: string = '';
 
+                                                                                                        /* access to service    */
   constructor(private userapi: UserAPIService, private Route: Router, private route: ActivatedRoute) { 
     
   }
