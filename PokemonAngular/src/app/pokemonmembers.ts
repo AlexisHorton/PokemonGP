@@ -1,17 +1,10 @@
 export interface Pokemon {
     id: number;
+    pokemonid: number;
+    userid: number;
     level: number;
     experience: number;
-    userid: number;
+    current_hitpoints: number;
     teampos: number;
     given_name: string;
-    species: string;
-    main_sprite: string;
-    order: number;
-    base_experience: number;
-    maxhp: number;
-    current_hp: number;
-    attack: number;
-    defense: number;
-    type: string;
 }

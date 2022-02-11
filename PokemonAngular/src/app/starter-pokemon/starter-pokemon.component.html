@@ -1,0 +1,32 @@
+<br>{{currentUserID}}<br><br>
+<ng-container *ngIf="Taken < 2">
+    Choose {{ToBeTaken - Taken}}
+
+    <table><tr><td>
+<ng-container *ngFor="let pokemon of pokemons">
+    <ng-container  *ngIf="pokemon.id == 1 || pokemon.id == 4 || pokemon.id == 7 || pokemon.id == 25">
+        <ng-container *ngIf="pokemon.id != choice1">
+    <table width=100; style=" float: left; border: black;" align="center">
+        <thead>
+            <tr>
+                <td align="center">
+                    <img src="{{pokemon.main_sprite}}"><br>
+                    # {{pokemon.id}}<br>
+                    {{pokemon.species}}<br>
+                    <button (click)=" showNaming()" *ngIf="!PickThisOne">Pick This One</button>
+                    <div *ngIf="PickThisOne">
+                            <button (click)="addMember(pokemon.id)">Submit</button>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+    </table>
+    
+</ng-container>
+</ng-container>
+</ng-container>
+</td></tr><tr><td>
+<button (click)=" hideNaming()" *ngIf="PickThisOne">Nevermind</button>
+<div *ngIf="PickThisOne">Name:<input type="text" [(ngModel)]="newmon.given_name"></div>
+</td></tr></table>
+</ng-container>

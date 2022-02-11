@@ -8,12 +8,18 @@ import { AppComponent } from './app.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PokemonBattleComponent } from './pokemon-battle/pokemon-battle.component';
+import { StarterPokemonComponent } from './starter-pokemon/starter-pokemon.component';
+import { UserPokedexComponent } from './user-pokedex/user-pokedex.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
-    UserHomepageComponent
+    UserHomepageComponent,
+    PokemonBattleComponent,
+    StarterPokemonComponent,
+    UserPokedexComponent
   ],
   imports: [
     BrowserModule, 

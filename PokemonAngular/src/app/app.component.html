@@ -1,7 +1,13 @@
-<a routerLink="/">Sign In</a>&nbsp;
-<a routerLink="/userlogin">User Homepage</a>
 
-<h1>Welcome to Pokemon Battle!</h1>
-<div>
-    <app-user-login (AddUser)="addUser($event)"></app-user-login>
-</div>
+
+<a routerLink="/home">Homepage</a>&nbsp;
+<a routerLink="/userlogin">Sign In</a>&nbsp;
+<a routerLink="/userhomepage">My Homepage</a>
+<a routerLink="/pokedex">My Pokedex</a>
+<a routerLink="/starter">Starter</a>
+<a routerLink="/battle">Battle</a>
+
+    
+
+
+    <router-outlet></router-outlet>
