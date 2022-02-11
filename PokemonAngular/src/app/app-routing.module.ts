@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { PokemonBattleComponent } from './pokemon-battle/pokemon-battle.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 
@@ -13,8 +14,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'userhomepage', component: UserHomepageComponent },
+  { path: 'pokemonbattle', component: PokemonBattleComponent},
   { path: '**', component: AppComponent  }
-
 ];
 
 

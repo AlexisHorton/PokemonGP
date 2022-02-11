@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PokemonAPIService } from '../pokemon-api.service';
 import { PokemonFull } from '../pokemon-full';
 import { Pokemon } from '../pokemonmembers';
 import { UserAPIService } from '../user-api.service';
@@ -13,14 +14,35 @@ export class UserHomepageComponent implements OnInit {
 
   allUsers: UserLogin[] = [];
   pokemonTeam: Pokemon[] = [];
+  pokefull: PokemonFull[] = []; 
 
   currentUser: string = '';
   currentUserID: number = 0;
   current_User: UserLogin | null = null;
 
-  constructor(private userapi: UserAPIService) { }
+  constructor(private userapi: UserAPIService, private pokemonapi: PokemonAPIService) {
+    this.currentUser = this.userapi.currentUser;
+   }
 
   ngOnInit(): void {
+    this.refreshList();
+  }
+
+  refreshList() {
+    this.pokemonapi.listMembers( this.currentUserID,
+        (result: Pokemon[]) => {
+          console.log('Results!')
+          console.log(result);
+          this.pokemonTeam = result;
+        }
+      )
+      this.pokemonapi.GetPokemon(
+        (resultb: PokemonFull[]) => {
+          console.log('Results!')
+          console.log(resultb);
+          this.pokefull = resultb;
+        }
+      )
   }
 
   refreshUserList(){
