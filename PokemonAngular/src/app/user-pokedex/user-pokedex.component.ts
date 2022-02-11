@@ -17,7 +17,7 @@ export class UserPokedexComponent implements OnInit {
   pokefull: PokemonFull[] = [];
   selected: number | null = null;
   currentUserID : number = 0;
-  currentUser: string = '';
+  currentUser: string = '';                                           /* data flow from class to template*/
   @Input() tposition: number = 0;
 
 
