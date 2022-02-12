@@ -42,12 +42,18 @@ export class PokemonBattleComponent implements OnInit {
 			if (this.PlayerPokemonFull && this.EnemyPokemonFull) {
 				savePokemon.current_hitpoints = this.PlayerPokemon.current_hitpoints
 				if (won) {
-					savePokemon.experience += this.EnemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level / 5))
-					while (savePokemon.experience > Math.pow(savePokemon.level, 3)) {
-						savePokemon.experience -= Math.pow(savePokemon.level, 3)
-						savePokemon.level++
-						savePokemon.current_hitpoints += Math.floor(this.PlayerPokemonFull.hitpoints * (1 + (savePokemon.level/50))) - Math.floor(this.PlayerPokemonFull.hitpoints * (1 + ((savePokemon.level - 1)/50)))
-					}
+                    if (savePokemon.level < 100) {
+                        savePokemon.experience += this.EnemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level / 5))
+                        while (savePokemon.experience > Math.pow(savePokemon.level, 3) && savePokemon.level < 100) {
+                            savePokemon.experience -= Math.pow(savePokemon.level, 3)
+                            savePokemon.level++
+                            savePokemon.current_hitpoints += Math.floor(this.PlayerPokemonFull.hitpoints * (1 + (savePokemon.level/50))) - Math.floor(this.PlayerPokemonFull.hitpoints * (1 + ((savePokemon.level - 1)/50)))
+                        }
+                    }
+                    else {
+                        savePokemon.experience = 0
+                    }
+					
 				}
 				this.pokemonapi.updatePokemon(savePokemon, () => {
 					this.RefreshTeam()
@@ -158,6 +164,9 @@ export class PokemonBattleComponent implements OnInit {
     Attack(attacker: BattlePokemon | null, target: BattlePokemon | null) {
         if (attacker && target) {
             let damage = Math.floor((((2 * attacker.level) / 5) + 2) * attacker.attack / target.defense) + 2
+            if (Math.floor(Math.random() * 10) == 0) {
+                damage *= 2;
+            }
             if (target.current_hitpoints - damage <= 0) {
                 target.current_hitpoints = 0
                 this.battleEnding = true;
@@ -173,22 +182,6 @@ export class PokemonBattleComponent implements OnInit {
                     this.turnPlaying = false;
                 }
             }
-        }
-    }
- 
-    GetEnemyLevel() {
-        let average = this.GetAverageTeamLevel()
-        if (average < 10) {
-            return average - 2;
-        }
-        else {
-			let enemyLevel: number = average - 2 + this.GetRandomInt(4);
-            if (enemyLevel > 0) {
-				return enemyLevel
-			}
-			else {
-				return 1
-			}
         }
     }
  
@@ -211,28 +204,11 @@ export class PokemonBattleComponent implements OnInit {
 		}
 	}
 
-	GetAverageTeamLevel() {
-		let levelSum: number = 0;
-        for (let i = 0; i < this.PlayerTeam.length; i++) {
-            levelSum += this.PlayerTeam[i].level
-        }
-        return Math.floor(levelSum / this.PlayerTeam.length)
-	}
-
-	PickRandomEnemyPokemon() {
-		let average = this.GetAverageTeamLevel()
-		if (average < 10) {
-			return 10 + (this.GetRandomInt(3) * 3)
-		}
-		else {
-			return 1 + this.GetRandomInt(151)
-		}
-	}
-
     GetAverageTeamBattlescore() {
         let sum: number = 0;
         for (let i = 0; i < this.PlayerTeam.length; i++) {
-            sum += this.PokemonFullList[this.PlayerTeam[i].pokemonid].battle_score;
+            console.log(this.PlayerTeam[0].pokemonid)
+            sum += Math.floor(this.PokemonFullList[this.PlayerTeam[i].pokemonid - 1].battle_score * Math.pow(1 + (this.PlayerTeam[i].level / 50), 3));
         }
         let average: number = Math.floor(sum / this.PlayerTeam.length);
         console.log(average);

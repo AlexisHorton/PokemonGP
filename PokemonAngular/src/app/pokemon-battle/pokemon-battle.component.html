@@ -11,8 +11,8 @@
     {{ PlayerPokemon?.species }}<br />
     lv. {{ PlayerPokemon?.level }}<br />
     {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
-    <button [disabled]="turnPlaying" (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
+    <button [disabled]="turnPlaying || battleEnding" (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
     <button [disabled]="battleEnding" (click)="EndBattle(false)">Run away!</button><br />
-    <button (click)="OpenItems()">Items!</button>
-    <button (click)="DisplayTeam()">Switch Pokemon!</button>
+    <button [disabled]="battleEnding" (click)="OpenItems()">Items!</button>
+    <button [disabled]="battleEnding" (click)="DisplayTeam()">Switch Pokemon!</button>
 </div>
