@@ -9,7 +9,7 @@ using PokemonGP.Models;
 namespace PokemonGP.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20220209194525_CreatePokemon")]
+    [Migration("20220211183703_CreatePokemon")]
     partial class CreatePokemon
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace PokemonGP.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("base_experience")
+                        .HasColumnType("int");
+
+                    b.Property<int>("battle_score")
                         .HasColumnType("int");
 
                     b.Property<int>("defense")

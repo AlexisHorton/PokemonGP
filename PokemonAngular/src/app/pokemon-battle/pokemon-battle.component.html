@@ -3,12 +3,16 @@
     <button (click)="HealTeam()">Heal Pokemon!</button>
 </div>
 <div *ngIf="inBattle">
-    <img src="{{ EnemyPokemonImage }}"><br />
-    {{ EnemyPokemon?.species }} {{ EnemyPokemon?.level }}<br />
+    <img src="{{ EnemyPokemonFull?.main_sprite }}"><br />
+    {{ EnemyPokemon?.species }}<br />
+    lv. {{ EnemyPokemon?.level }}<br />
     {{ EnemyPokemon?.current_hitpoints }} / {{ EnemyPokemon?.hitpoints }}<br /><br />
-    <img src="{{ PlayerPokemonImage }}"><br />
-    {{ PlayerPokemon?.species }} {{ PlayerPokemon?.level }}<br />
+    <img src="{{ PlayerPokemonFull?.main_sprite }}"><br />
+    {{ PlayerPokemon?.species }}<br />
+    lv. {{ PlayerPokemon?.level }}<br />
     {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
-    <button (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
-    <button (click)="EndBattle(false)">Run away!</button>
+    <button [disabled]="turnPlaying" (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
+    <button [disabled]="battleEnding" (click)="EndBattle(false)">Run away!</button><br />
+    <button (click)="OpenItems()">Items!</button>
+    <button (click)="DisplayTeam()">Switch Pokemon!</button>
 </div>

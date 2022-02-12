@@ -38,7 +38,8 @@ namespace PokemonGP.Migrations
                     hitpoints = table.Column<int>(nullable: false),
                     attack = table.Column<int>(nullable: false),
                     defense = table.Column<int>(nullable: false),
-                    type = table.Column<string>(nullable: true)
+                    type = table.Column<string>(nullable: true),
+                    battle_score = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

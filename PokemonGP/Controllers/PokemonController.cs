@@ -59,5 +59,12 @@ namespace PokemonGP.Controllers
         {
             return UserDB.updatePokemon(member);
         }
+
+        [HttpGet]
+        [Route("enemy")]
+        public EnemyObject GetRandomEnemy(int battlescore)
+        {
+            return UserDB.GetRandomEnemy(battlescore);
+        }
     }
 }
