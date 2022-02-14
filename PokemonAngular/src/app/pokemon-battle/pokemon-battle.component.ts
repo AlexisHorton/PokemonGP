@@ -179,7 +179,9 @@ export class PokemonBattleComponent implements OnInit {
             else {
                 target.current_hitpoints -= damage;
                 if (target == this.PlayerPokemon) {
-                    this.turnPlaying = false;
+                    setTimeout(() => {
+                        this.turnPlaying = false;
+                    }, 500)
                 }
             }
         }
@@ -215,7 +217,7 @@ export class PokemonBattleComponent implements OnInit {
         return average;
     }
 
-    OpenItems() {
+    DisplayItems() {
 
     }
 

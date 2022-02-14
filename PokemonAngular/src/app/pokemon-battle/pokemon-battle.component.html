@@ -13,6 +13,6 @@
     {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
     <button [disabled]="turnPlaying || battleEnding" (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
     <button [disabled]="battleEnding" (click)="EndBattle(false)">Run away!</button><br />
-    <button [disabled]="battleEnding" (click)="OpenItems()">Items!</button>
+    <button [disabled]="battleEnding" (click)="DisplayItems()">Items!</button>
     <button [disabled]="battleEnding" (click)="DisplayTeam()">Switch Pokemon!</button>
 </div>

@@ -47,6 +47,47 @@ namespace PokemonGP.Models
         public string url { get; set; }
     }
 
+    public class EvolutionsChain
+    {
+        public Chain chain { get; set; }
+    }
+
+    public class Chain
+    {
+        public EvolveArray1[] evolves_to { get; set; }
+        public EvolveSpecies species { get; set; }
+    }
+
+    public class EvolveArray1
+    {
+        public EvolveDetails evolution_details { get; set; }
+        public EvolveSpecies species { get; set; }
+        public EvolveArray2[] evolves_to { get; set; }
+    }
+
+    public class EvolveArray2
+    {
+        public EvolveDetails evolution_details { get; set; }
+        public EvolveSpecies species { get; set; }
+        public EvolveArray3[] evolves_to { get; set; }
+    }
+
+    public class EvolveArray3
+    {
+        public EvolveDetails evolution_details { get; set; }
+        public EvolveSpecies species { get; set; }
+    }
+
+    public class EvolveSpecies
+    {
+        public string name { get; set; }
+    }
+
+    public class EvolveDetails
+    {
+        public int min_level { get; set; }
+    }
+
     public class PokemonAPI
     {
         private static HttpClient _realClient = null;
