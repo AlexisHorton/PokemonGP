@@ -95,4 +95,105 @@ export class PokemonBattleComponent implements OnInit {
 		)
 	}
 
+  GetStarter() {
+		for (let i: number = 0; i < this.PlayerTeam.length; i++) {
+			let pokemon: Pokemon = this.PlayerTeam[i];
+			if (pokemon.teampos == 1) {
+				return pokemon;
+			}
+		}
+		return null;
+	}
+
+  Battle() {
+		this.inBattle = true;
+		let playerPokemon: Pokemon | null = this.GetStarter()
+		if (playerPokemon) {
+			this.GetPokemonFull(playerPokemon.pokemonid, (playerResult: PokemonFull) => {
+				let pokemonFull: PokemonFull = playerResult
+				console.log(playerResult)
+				if (pokemonFull) {
+					this.PlayerPokemon = this.CreateBattlePokemonProfile(pokemonFull, playerPokemon?.level, true);
+				}
+				this.GetPokemonFull(10 + (this.GetRandomInt(3) * 3), (result: PokemonFull) => {
+					pokemonFull = result
+					if (pokemonFull) {
+						this.EnemyPokemon = this.CreateBattlePokemonProfile(pokemonFull, 3, false)
+					}
+				})
+			});
+		}
+	}
+
+  Attack(attacker: Battlepokemon | null, target: Battlepokemon | null) {
+		if (attacker && target) {
+			let damage = Math.floor((((2 * attacker.level) / 5) + 2) * attacker.attack / target.defense) + 2
+			if (target.current_hitpoints - damage <= 0) {
+				target.current_hitpoints = 0
+				setTimeout(() => {
+					this.EndBattle(target == this.EnemyPokemon);
+				}, 1000)
+			}
+			else {
+				target.current_hitpoints -= damage;
+			}
+		}
+	}
+
+  PlayTurn(pokemon1: Battlepokemon | null, pokemon2: Battlepokemon | null) {
+		if (pokemon1 && pokemon2) {
+			if (pokemon1.current_hitpoints > 0 && pokemon2.current_hitpoints > 0) {
+				console.log("ran")
+				this.Attack(pokemon1, pokemon2)
+				if (pokemon2 && pokemon2.current_hitpoints > 0) {
+					this.Attack(pokemon2, pokemon1)
+				}
+			}
+		}
+	}
+
+	EndBattle(won: boolean) {
+		this.inBattle = false
+		let currentPokemon: Pokemon | null = this.GetStarter()
+		if (currentPokemon && this.PlayerPokemon && this.EnemyPokemon) {
+			let savePokemon: Pokemon = currentPokemon
+			let playerPokemonFull: PokemonFull;
+			let enemyPokemonFull: PokemonFull;
+			this.GetPokemonFull(this.EnemyPokemon.id, (enemyResult: PokemonFull) => {
+				if (this.PlayerPokemon) {
+					this.GetPokemonFull(this.PlayerPokemon.id, (playerResult: PokemonFull) => {
+						if (this.PlayerPokemon && this.EnemyPokemon) {
+							playerPokemonFull = playerResult
+							enemyPokemonFull = enemyResult
+							if (won) {
+								savePokemon.current_hitpoints = this.PlayerPokemon.current_hitpoints
+								savePokemon.experience += enemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level / 5))
+								do {
+									if (savePokemon.experience >= 100) {
+										savePokemon.level++
+										savePokemon.experience -= 100
+										savePokemon.current_hitpoints += Math.floor(playerPokemonFull.hitpoints * (1 + (savePokemon.level/50))) - Math.floor(playerPokemonFull.hitpoints * (1 + ((savePokemon.level - 1)/50)))
+									}
+								} while (savePokemon.experience > 100)
+							}
+							else {
+								savePokemon.current_hitpoints = 0
+							}
+							this.pokemonapi.updatePokemon(savePokemon, () => {})
+							this.EnemyPokemon = null;
+						}
+					});
+				}
+			});
+		}
+	}
+
+	HealTeam() {
+		for (let i = 0; i < this.PlayerTeam.length; i++) {
+			this.GetPokemonFull(this.PlayerTeam[i].pokemonid, (result: PokemonFull) => {
+				this.PlayerTeam[i].current_hitpoints = Math.floor(result.hitpoints * (1 + (this.PlayerTeam[i].level / 50)))
+				this.pokemonapi.updatePokemon(this.PlayerTeam[i], () => {});
+			});
+		}
+	}
 }

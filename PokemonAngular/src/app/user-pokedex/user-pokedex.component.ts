@@ -15,8 +15,10 @@ export class UserPokedexComponent implements OnInit {
   poketeam: Pokemon[] = [];
   pokefull: PokemonFull[] = [];
   selected: number | null = null;
-  @Input() currentuserID = this.userapi.currentUserID;
-  @Input() tposition: number = 0;
+  currentUserID : number = 0;
+  currentUser: string = '';  
+  tposition: number = 0;
+
 
   editmon: Pokemon = {
     id: 0,
@@ -29,7 +31,11 @@ export class UserPokedexComponent implements OnInit {
     current_hitpoints: 0
   }
 
-  constructor(private pokemonapi: PokemonAPIService,private userapi: UserAPIService) { }
+  constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) {
+    this.currentUserID = this.userapi.currentUserID;
+    this.currentUser = this.userapi.currentUser;
+    this.refreshList();
+   }
 
   ngOnInit(): void {
   }
@@ -41,8 +47,15 @@ export class UserPokedexComponent implements OnInit {
           console.log(result);
           this.poketeam = result;
         }
-      )
+      );
+      this.pokemonapi.GetPokemon(
+        (resultb: PokemonFull[]) => {
+          console.log('Results!')
+          console.log(resultb);
+          this.pokefull = resultb; 
+        });
   }
+
   lookAtThis(id : number){
     this.selected = id;
     this.moreinfo = true;
@@ -60,8 +73,8 @@ export class UserPokedexComponent implements OnInit {
     this.editmon.level = this.poketeam[id - 1].level;
     this.editmon.experience = this.poketeam[id - 1].experience;
     this.editmon.userid = this.poketeam[id - 1].userid;
-    this.editmon.teampos = this.tposition;
     this.editmon.given_name = this.poketeam[id - 1].given_name;
+    this.editmon.teampos = this.tposition;
     
     this.pokemonapi.updatePokemon(this.editmon,
       () => {

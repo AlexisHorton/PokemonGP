@@ -153,6 +153,7 @@ namespace PokemonGP.Models
         }
     }
 
+    // Database
     public class PokemonContext : DbContext
     {
         public DbSet<UserLogin> UserStorage { get; set; }

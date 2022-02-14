@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PokemonAPIService } from '../pokemon-api.service';
+import { PokemonFull } from '../pokemon-full';
 import { UserAPIService } from '../user-api.service';
 import { UserLogin } from '../user-login';
 
@@ -10,8 +12,9 @@ import { UserLogin } from '../user-login';
 export class HomePageComponent implements OnInit {
 
   allUsers: UserLogin[] = [];
+  allPokemon: PokemonFull[] = [];
 
-  constructor(private userapi: UserAPIService) { }
+  constructor(private userapi: UserAPIService, private pokemonapi: PokemonAPIService) { }
 
   ngOnInit(): void {
     this.refreshUserList();
@@ -21,6 +24,14 @@ export class HomePageComponent implements OnInit {
     this.userapi.GetUsers(
       (results: any) => {
         this.allUsers = results;
+      }
+    )
+  }
+
+  listPokemon(){
+    this.pokemonapi.GetPokemon(
+      (results: any) => {
+        this.allPokemon = results;
       }
     )
   }

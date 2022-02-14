@@ -17,6 +17,8 @@ export class StarterPokemonComponent implements OnInit {
   Taken: number = 0;
   ToBeTaken: number = 2;
   choice1: number | null = null;
+  currentUserID: number = 0;
+  currentUser: string = '';
 
   newmon: Pokemon = {
     id: 0,
@@ -29,11 +31,10 @@ export class StarterPokemonComponent implements OnInit {
     given_name: ''
   }
 
-  @Input() pokemon: PokemonFull | undefined = undefined;
-  @Output() addmember: EventEmitter<Pokemon> = new EventEmitter<Pokemon>();
-
   constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) { 
     this.refreshList();
+    this.currentUserID = this.userapi.currentUserID;
+        this.currentUser = this.userapi.currentUser;
   }
 
   ngOnInit(): void {

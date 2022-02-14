@@ -1,4 +1,4 @@
-<h1>Your PokeDex: {{currentuserID}} </h1> 
+<h1>Your PokeDex: {{currentUserID}} </h1> 
 <ng-container *ngFor="let pokemon of poketeam">
     <ng-container *ngIf="pokemon.id == selected">
 <table width=100%; style=" float: left; border: black;" align="center">
@@ -31,7 +31,7 @@
 </ng-container>
 <br>
 <ng-container *ngFor="let pokemon of poketeam">
-    <ng-container *ngIf="pokemon.userid == currentuserID">
+    <ng-container *ngIf="pokemon.userid == currentUserID">
             <table width=100; style=" float: left; border: black;" align="center">
                  <thead>
                          <tr>

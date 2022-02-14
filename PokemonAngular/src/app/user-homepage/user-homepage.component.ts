@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PokemonAPIService } from '../pokemon-api.service';
 import { PokemonFull } from '../pokemon-full';
 import { Pokemon } from '../pokemonmembers';
@@ -20,7 +21,7 @@ export class UserHomepageComponent implements OnInit {
   currentUserID: number = 0;
   current_User: UserLogin | null = null;
 
-  constructor(private userapi: UserAPIService, private pokemonapi: PokemonAPIService) {
+  constructor(private userapi: UserAPIService, private pokemonapi: PokemonAPIService, private router: Router) {
     this.currentUser = this.userapi.currentUser;
    }
 
@@ -67,6 +68,13 @@ export class UserHomepageComponent implements OnInit {
         this.pokemonTeam = result; 
       }
     )
+  }
+
+  LogOut(){
+    window.sessionStorage.clear();
+    this.userapi.currentUser = '';
+    this.userapi.currentUserID = 0;
+    this.router.navigate(["/home"])
   }
 
 }
