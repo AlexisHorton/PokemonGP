@@ -43,6 +43,7 @@ namespace PokemonGP.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_PokemonFullList", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
