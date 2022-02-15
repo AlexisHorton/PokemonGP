@@ -218,6 +218,7 @@ namespace PokemonGP.Models
                     return false;
                 }
                 PokemonFull newmon = new PokemonFull();
+                newmon.id = monster.id;
                 newmon.species = monster.species.name;
                 newmon.main_sprite = monster.sprites.front_default;
                 newmon.height = monster.height;

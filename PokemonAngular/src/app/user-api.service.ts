@@ -39,6 +39,6 @@ export class UserAPIService {
     )
   }
   listTeam(userid: number, cb: any){
-    this.http.get<Pokemon[]>(`https://localhost:5001/userlogin/teamlist?id=${userid}`).subscribe(cb)
+    this.http.get<Pokemon[]>(`https://localhost:5001/userlogin/teamlist?userID=${userid}`).subscribe(cb)
   }
 }

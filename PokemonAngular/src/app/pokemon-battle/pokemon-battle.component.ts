@@ -28,6 +28,7 @@ export class PokemonBattleComponent implements OnInit {
     constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) { }
  
     ngOnInit(): void {
+        console.log(this.GetUserID())
         this.RefreshTeam()
         this.pokemonapi.GetPokemon((result: PokemonFull[]) => {
             this.PokemonFullList = result;
@@ -81,6 +82,7 @@ export class PokemonBattleComponent implements OnInit {
  
     GetPlayerPokemonHitpoints(id: number) {
         for (let i = 0; i < this.PlayerTeam.length; i++) {
+            console.log(this.PlayerTeam[i].id, id)
             if (this.PlayerTeam[i].id == id) {
                 return this.PlayerTeam[i].current_hitpoints;
             }
@@ -136,15 +138,15 @@ export class PokemonBattleComponent implements OnInit {
         if (playerPokemon != undefined) {
             this.GetPokemonFull(playerPokemon.pokemonid, (playerResult: PokemonFull) => {
                 this.PlayerPokemonFull = playerResult
-				if (playerPokemon && playerResult) {
-					this.PlayerPokemon = this.CreateBattlePokemonProfile(playerPokemon.id, playerResult, playerPokemon.level, true);
-				}
-				this.GetRandomEnemy(this.GetAverageTeamBattlescore(), (enemyResult: EnemyObject) => {
-					this.EnemyPokemonFull = enemyResult.pokemon;
-					if (enemyResult) {
-						this.EnemyPokemon = this.CreateBattlePokemonProfile(null, enemyResult.pokemon, enemyResult.level, false)
-					}
-				})
+                if (playerPokemon && playerResult) {
+                    this.PlayerPokemon = this.CreateBattlePokemonProfile(playerPokemon.id, playerResult, playerPokemon.level, true);
+                }
+                this.GetRandomEnemy(this.GetAverageTeamBattlescore(), (enemyResult: EnemyObject) => {
+                    this.EnemyPokemonFull = enemyResult.pokemon;
+                    if (enemyResult) {
+                        this.EnemyPokemon = this.CreateBattlePokemonProfile(null, enemyResult.pokemon, enemyResult.level, false)
+                    }
+                })
             });
         }
     }
@@ -189,6 +191,7 @@ export class PokemonBattleComponent implements OnInit {
  
     RefreshTeam() {
         if (this.GetUserID() > 0) {
+            console.log(this.GetUserID())
             this.userapi.listTeam(this.GetUserID(),
                 (result: Pokemon[]) => {
                     this.PlayerTeam = result;
