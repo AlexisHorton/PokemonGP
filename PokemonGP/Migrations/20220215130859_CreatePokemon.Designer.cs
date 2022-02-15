@@ -9,7 +9,7 @@ using PokemonGP.Models;
 namespace PokemonGP.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20220211183703_CreatePokemon")]
+    [Migration("20220215130859_CreatePokemon")]
     partial class CreatePokemon
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
