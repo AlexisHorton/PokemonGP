@@ -1,7 +1,6 @@
-<h1>Hey {{currentUser}} {{currentUserID}}</h1>
+<h1>Welcome to your Homepage {{ currentUser }}</h1> 
+<div *ngIf="teamcount < 2">
+<app-starter-pokemon></app-starter-pokemon>
+</div>
 
-<p>User Inventory</p>
-
-<p>User Team
-    player stats?
-</p>
+<app-user-pokedex></app-user-pokedex>

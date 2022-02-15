@@ -2,7 +2,7 @@
 
 namespace PokemonGP.Migrations
 {
-    public partial class CreatePokemon : Migration
+    public partial class createpokemon : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,9 @@ namespace PokemonGP.Migrations
                     attack = table.Column<int>(nullable: false),
                     defense = table.Column<int>(nullable: false),
                     type = table.Column<string>(nullable: true),
-                    battle_score = table.Column<int>(nullable: false)
+                    battle_score = table.Column<int>(nullable: false),
+                    evolve_to = table.Column<int>(nullable: false),
+                    evolve_at = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

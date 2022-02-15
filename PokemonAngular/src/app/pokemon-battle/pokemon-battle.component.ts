@@ -6,6 +6,7 @@ import { Pokemon } from '../pokemonmembers'
 import { BattlePokemon } from '../battle-pokemon'
 import { EnemyObject } from '../enemy-object'
 import { UserAPIService } from '../user-api.service';
+import { HashLocationStrategy } from '@angular/common';
  
 @Component({
     selector: 'app-pokemon-battle',
@@ -20,6 +21,8 @@ export class PokemonBattleComponent implements OnInit {
     PlayerPokemonFull: PokemonFull | null = null;
     EnemyPokemon: BattlePokemon | null = null;
     EnemyPokemonFull: PokemonFull | null = null;
+    teamposition: number = 0;
+    swappokemon: Pokemon | null = null;
  
     inBattle: boolean = false;
     turnPlaying: boolean = false;
@@ -48,6 +51,9 @@ export class PokemonBattleComponent implements OnInit {
                             savePokemon.experience -= Math.pow(savePokemon.level, 3)
                             savePokemon.level++
                             savePokemon.current_hitpoints += Math.floor(this.PlayerPokemonFull.hitpoints * (1 + (savePokemon.level/50))) - Math.floor(this.PlayerPokemonFull.hitpoints * (1 + ((savePokemon.level - 1)/50)))
+                            if (this.PlayerPokemonFull.evolve_to != 0 && savePokemon.level >= this.PlayerPokemonFull.evolve_at) {
+                                savePokemon.pokemonid = this.PlayerPokemonFull.evolve_to;
+                            }
                         }
                     }
                     else {
@@ -66,7 +72,7 @@ export class PokemonBattleComponent implements OnInit {
     }
 
     GetUserID() {
-        if (this.userapi.currentUserID) {
+        if (this.userapi.currentUser) {
             return this.userapi.currentUserID
         }
         else {
@@ -223,5 +229,34 @@ export class PokemonBattleComponent implements OnInit {
 
     DisplayTeam() {
 
+    }
+    SwapPosition(id: number) {
+        for (let i: number = 0; i < this.PlayerTeam.length; i++) {
+            if (this.PlayerTeam[i].id == id) {
+                this.teamposition = this.PlayerTeam[i].teampos
+                this.PlayerTeam[i].teampos = 1;
+                this.pokemonapi.updatePokemon(this.PlayerTeam[i], () => {})
+            }
+            else if (this.PlayerTeam[i].teampos == 1) {
+                this.swappokemon = this.PlayerTeam[i]
+            }
+        }
+        if (this.swappokemon) {
+            this.swappokemon.teampos = this.teamposition
+            console.log(this.teamposition)
+            this.pokemonapi.updatePokemon(this.swappokemon, () => {});
+        }
+        this.PlayerPokemon = null;
+        this.PlayerPokemonFull = null;
+        this.RefreshTeam();
+        let playerPokemon: Pokemon | undefined = this.GetStarter();
+        if (playerPokemon != undefined) {
+            this.GetPokemonFull(playerPokemon.pokemonid, (playerResult: PokemonFull) => {
+                this.PlayerPokemonFull = playerResult
+				if (playerPokemon && playerResult) {
+					this.PlayerPokemon = this.CreateBattlePokemonProfile(playerPokemon.id, playerResult, playerPokemon.level, true);
+				}
+            });
+        }
     }
 }

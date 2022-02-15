@@ -1,18 +1,65 @@
+<h1>Battle!</h1>
+
 <div *ngIf="!inBattle">
     <button (click)="Battle()">Battle!</button> <br />
     <button (click)="HealTeam()">Heal Pokemon!</button>
 </div>
 <div *ngIf="inBattle">
-    <img src="{{ EnemyPokemonFull?.main_sprite }}"><br />
+    
+    
+<table style=" float: left;" width="200">
+    <tr>
+        <td>
+            <h2>Your Pokemon</h2>
+            <img src="{{ PlayerPokemonFull?.main_sprite }}"><br />
+            {{ PlayerPokemon?.species }}<br />
+            lv. {{ PlayerPokemon?.level }}<br />
+            {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
+        </td>
+    </tr>
+</table>
+<table style=" float: left;" width="200">
+    <tr>
+        <td>
+            <h2>Enemy Pokemon</h2>
+            <img src="{{ EnemyPokemonFull?.main_sprite }}"><br />
     {{ EnemyPokemon?.species }}<br />
     lv. {{ EnemyPokemon?.level }}<br />
     {{ EnemyPokemon?.current_hitpoints }} / {{ EnemyPokemon?.hitpoints }}<br /><br />
-    <img src="{{ PlayerPokemonFull?.main_sprite }}"><br />
-    {{ PlayerPokemon?.species }}<br />
-    lv. {{ PlayerPokemon?.level }}<br />
-    {{ PlayerPokemon?.current_hitpoints }} / {{ PlayerPokemon?.hitpoints }}<br /><br />
+        </td>
+    </tr>
+</table>
+<table width="100%"></table>
+
     <button [disabled]="turnPlaying || battleEnding" (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
     <button [disabled]="battleEnding" (click)="EndBattle(false)">Run away!</button><br />
     <button [disabled]="battleEnding" (click)="DisplayItems()">Items!</button>
     <button [disabled]="battleEnding" (click)="DisplayTeam()">Switch Pokemon!</button>
 </div>
+
+
+
+<ng-container *ngFor="let pokemon of PlayerTeam">
+    
+    <ng-container *ngIf="pokemon.teampos < 7">
+<table width=100; style=" float: left; border: black;" align="center">
+    <thead>
+        <tr>
+            <td align="center">
+                <div *ngFor="let pokemon2 of PokemonFullList">
+                    <div *ngIf="pokemon.pokemonid == pokemon2.id">
+                <img src="{{pokemon2.main_sprite}}"><br>
+                {{pokemon.given_name}}<br>
+                # {{pokemon.pokemonid}}<br>
+                {{pokemon2.species}}<br>
+                Lvl.{{pokemon.level}}<br>
+                Position {{pokemon.teampos}}
+                <button (click)="SwapPosition(pokemon.id)">Swap In</button>
+                </div></div>
+            </td>
+        </tr>
+   </thead>
+</table>
+</ng-container>
+
+</ng-container>

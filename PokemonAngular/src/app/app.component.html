@@ -1,13 +1,22 @@
+<button>
+    <a routerLink="/home">Homepage</a>
+    </button>&nbsp;
+<button>
+    <a routerLink="/userlogin">Log In</a>
+    </button>&nbsp;
+<button>
+    <a routerLink="/userhomepage">My Homepage</a>
+    </button>&nbsp;
+<button>
+    <a routerLink="/pokemonbattle">Battle!</a>
+    </button>&nbsp;
 
-
-<a routerLink="/home">Homepage</a>&nbsp;
-<a routerLink="/userlogin">Sign In</a>&nbsp;
-<a routerLink="/userhomepage">My Homepage</a>
-<a routerLink="/pokedex">My Pokedex</a>
-<a routerLink="/starter">Starter</a>
-<a routerLink="/battle">Battle</a>
-
+<ng-container *ngIf="this.currentUserID == 0 ">
+    <button (click)="LogOut()" >
+        LogOut
+    </button>
+</ng-container>
     
 
 
-    <router-outlet></router-outlet>
+<router-outlet></router-outlet>

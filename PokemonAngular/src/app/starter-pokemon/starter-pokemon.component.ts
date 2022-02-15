@@ -63,6 +63,7 @@ export class StarterPokemonComponent implements OnInit {
   addMember(id : number) {
     this.newmon.pokemonid = this.pokemons[id - 1].id;
     this.newmon.userid = this.currentUserID;
+    this.newmon.current_hitpoints = this.pokemons[id -1].hitpoints;
 
     this.pokemonapi.addPokemon(this.newmon, 
       () => {

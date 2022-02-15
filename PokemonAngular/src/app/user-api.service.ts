@@ -12,6 +12,8 @@ export class UserAPIService {
   currentUser: string = '';
   currentUserID: number = 0;
   current_User: UserLogin | null = null;
+  teamcount: number = 0;
+
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +41,6 @@ export class UserAPIService {
     )
   }
   listTeam(userid: number, cb: any){
-    this.http.get<Pokemon[]>(`https://localhost:5001/userlogin/teamlist?id=${userid}`).subscribe(cb)
+    this.http.get<Pokemon[]>(`https://localhost:5001/userlogin/teamlist?userID=${userid}`).subscribe(cb)
   }
 }
