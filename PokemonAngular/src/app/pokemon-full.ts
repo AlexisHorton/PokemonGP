@@ -9,4 +9,5 @@ export interface PokemonFull {
     attack: number;
     defense: number;
     type: string;
+    battle_score: number;
 }

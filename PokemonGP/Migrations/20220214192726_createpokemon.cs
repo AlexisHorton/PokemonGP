@@ -2,7 +2,7 @@
 
 namespace PokemonGP.Migrations
 {
-    public partial class CreatePokemonDB : Migration
+    public partial class CreatePokemon : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,20 +12,13 @@ namespace PokemonGP.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    pokemonid = table.Column<int>(nullable: false),
+                    userid = table.Column<int>(nullable: false),
                     level = table.Column<int>(nullable: false),
                     experience = table.Column<int>(nullable: false),
-                    userid = table.Column<int>(nullable: false),
+                    current_hitpoints = table.Column<int>(nullable: false),
                     teampos = table.Column<int>(nullable: false),
-                    given_name = table.Column<string>(nullable: true),
-                    species = table.Column<string>(nullable: true),
-                    main_sprite = table.Column<string>(nullable: true),
-                    order = table.Column<int>(nullable: false),
-                    base_experience = table.Column<int>(nullable: false),
-                    maxhp = table.Column<int>(nullable: false),
-                    current_hp = table.Column<int>(nullable: false),
-                    attack = table.Column<int>(nullable: false),
-                    defense = table.Column<int>(nullable: false),
-                    type = table.Column<string>(nullable: true)
+                    given_name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,23 +29,22 @@ namespace PokemonGP.Migrations
                 name: "PokemonFullList",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     species = table.Column<string>(nullable: true),
                     main_sprite = table.Column<string>(nullable: true),
                     height = table.Column<int>(nullable: false),
                     weight = table.Column<int>(nullable: false),
-                    order = table.Column<int>(nullable: false),
                     base_experience = table.Column<int>(nullable: false),
-                    maxhp = table.Column<int>(nullable: false),
-                    current_hp = table.Column<int>(nullable: false),
+                    hitpoints = table.Column<int>(nullable: false),
                     attack = table.Column<int>(nullable: false),
                     defense = table.Column<int>(nullable: false),
-                    type = table.Column<string>(nullable: true)
+                    type = table.Column<string>(nullable: true),
+                    battle_score = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonFullList", x => x.ID);
+                    table.PrimaryKey("PK_PokemonFullList", x => x.id);
                 });
 
             migrationBuilder.CreateTable(

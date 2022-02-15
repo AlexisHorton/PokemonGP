@@ -7285,19 +7285,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alexi\\.nuget\\packages\\": {}
+    "C:\\Users\\Dans-LT\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alexi\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+      "projectUniqueName": "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
       "projectName": "PokemonGP",
-      "projectPath": "C:\\Users\\alexi\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
-      "packagesPath": "C:\\Users\\alexi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alexi\\source\\repos\\PokemonGP\\PokemonGP\\obj\\",
+      "projectPath": "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+      "packagesPath": "C:\\Users\\Dans-LT\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\alexi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dans-LT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7354,6 +7359,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.20, 3.1.20]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -7362,7 +7373,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
       }
     }
   }

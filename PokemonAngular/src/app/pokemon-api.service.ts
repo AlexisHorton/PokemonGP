@@ -25,10 +25,16 @@ export class PokemonAPIService {
   GetPokemon(cb: any){
     this.http.get<PokemonFull[]>('https://localhost:5001/pokemon/full_list').subscribe(cb)
   }
+
   GetPokemonFull(id: number, cb: any){
     this.http.get<PokemonFull>(`https://localhost:5001/pokemon/single?id=${id}`).subscribe(cb)
   }
-  updatePokemon(editMember: Pokemon, cb: any){
-    this.http.put('https://localhost:5001/pokemon', editMember).subscribe(cb)
+
+  updatePokemon(pokemon: Pokemon, cb: any){
+		this.http.put<Pokemon>('https://localhost:5001/pokemon', pokemon).subscribe(cb);
+	}
+
+  GetEnemyPokemon(battlescore: number, cb: any) {
+    this.http.get<PokemonFull>(`https://localhost:5001/pokemon/enemy?battlescore=${battlescore}`).subscribe(cb);
   }
 }

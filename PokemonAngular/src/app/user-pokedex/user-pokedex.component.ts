@@ -83,13 +83,13 @@ export class UserPokedexComponent implements OnInit {
     if (this.tposition > 6){
       this.tposition = 0;
     }
-    this.editmon.id = this.poketeam[id -2].id
-    this.editmon.level = this.poketeam[id -2].level;
-    this.editmon.pokemonid = this.poketeam[id -2].pokemonid;
-    this.editmon.experience = this.poketeam[id -2].experience;
-    this.editmon.userid = this.poketeam[id -2].userid;
+    this.editmon.id = this.poketeam[id -1].id
+    this.editmon.level = this.poketeam[id -1].level;
+    this.editmon.pokemonid = this.poketeam[id -1].pokemonid;
+    this.editmon.experience = this.poketeam[id -1].experience;
+    this.editmon.userid = this.poketeam[id -1].userid;
     this.editmon.teampos = this.tposition;
-    this.editmon.given_name = this.poketeam[id -2].given_name;
+    this.editmon.given_name = this.poketeam[id -1].given_name;
     if (this.tposition > 0)
     {
     for (let i: number = 0; i < this.poketeam.length; i++)
