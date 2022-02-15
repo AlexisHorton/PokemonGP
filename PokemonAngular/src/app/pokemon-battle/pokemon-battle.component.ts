@@ -100,6 +100,8 @@ export class PokemonBattleComponent implements OnInit {
             attack: Math.floor(pokemon.attack * (1 + (level/50))),
             defense: Math.floor(pokemon.defense * (1 + (level/50)))
         };
+        console.log(level/50, 1 + level/50, pokemon.hitpoints)
+        console.log(Math.floor(pokemon.hitpoints * (1 + (level/50))))
         if (player && id) {
             battlePokemon.current_hitpoints = this.GetPlayerPokemonHitpoints(id);
         }
