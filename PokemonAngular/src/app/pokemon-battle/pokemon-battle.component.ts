@@ -48,6 +48,9 @@ export class PokemonBattleComponent implements OnInit {
                             savePokemon.experience -= Math.pow(savePokemon.level, 3)
                             savePokemon.level++
                             savePokemon.current_hitpoints += Math.floor(this.PlayerPokemonFull.hitpoints * (1 + (savePokemon.level/50))) - Math.floor(this.PlayerPokemonFull.hitpoints * (1 + ((savePokemon.level - 1)/50)))
+                            if (savePokemon.level >= this.PlayerPokemonFull.evolve_at) {
+                                savePokemon.pokemonid = this.PlayerPokemonFull.evolve_to;
+                            }
                         }
                     }
                     else {

@@ -252,27 +252,26 @@ namespace PokemonGP.Models
 
                         ctx.PokemonFullList.Update(full);
                         ctx.SaveChanges();
-
-                        if (chain.chain.evolves_to[0].evolves_to.Length > 0)
+                    }
+                }
+                if (chain.chain.evolves_to.Length > 0 && chain.chain.evolves_to[0].evolves_to.Length > 0)
+                {
+                    PokemonFull full = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].species.name).FirstOrDefault();
+                    PokemonFull evolution = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].evolves_to[0].species.name).FirstOrDefault();
+                    if (full != null && evolution != null)
+                    {
+                        full.evolve_to = evolution.id;
+                        if (chain.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level != null)
                         {
-                            full = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].species.name).FirstOrDefault();
-                            evolution = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].evolves_to[0].species.name).FirstOrDefault();
-                            if (full != null && evolution != null)
-                            {
-                                full.evolve_to = evolution.id;
-                                if (chain.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level != null)
-                                {
-                                    full.evolve_at = (int)chain.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level;
-                                }
-                                else
-                                {
-                                    full.evolve_at = 36;
-                                }
-
-                                ctx.PokemonFullList.Update(full);
-                                ctx.SaveChanges();
-                            }
+                            full.evolve_at = (int)chain.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level;
                         }
+                        else
+                        {
+                            full.evolve_at = 36;
+                        }
+
+                        ctx.PokemonFullList.Update(full);
+                        ctx.SaveChanges();
                     }
                 }
 
