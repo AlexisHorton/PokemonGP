@@ -15,9 +15,9 @@ namespace PokemonGP.Controllers
     public class PokemonController : ControllerBase
     {
         [HttpGet]
-        public List<PokemonMembers> listMembers(int userID)
+        public List<PokemonMembers> listMembers()
         {
-            return UserDB.listMembers(userID);
+            return UserDB.listMembers();
         }
 
         [HttpPost]
@@ -57,6 +57,13 @@ namespace PokemonGP.Controllers
         public PokemonMembers updatePokemon(PokemonMembers member)
         {
             return UserDB.updatePokemon(member);
+        }
+
+        [HttpGet]
+        [Route("enemy")]
+        public EnemyObject GetRandomEnemy(int battlescore)
+        {
+            return UserDB.GetRandomEnemy(battlescore);
         }
     }
 }

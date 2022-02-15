@@ -33,4 +33,8 @@ export class PokemonAPIService {
   updatePokemon(editMember: Pokemon, cb: any){
     this.http.put('https://localhost:44347/pokemon', editMember).subscribe(cb)
   }
+
+  GetEnemyPokemon(battlescore: number, cb: any) {
+    this.http.get<PokemonFull>(`https://localhost:44347/pokemon/enemy?battlescore=${battlescore}`).subscribe(cb);
+  }
 }

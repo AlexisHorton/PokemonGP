@@ -28,6 +28,7 @@ namespace PokemonGP.Models
 
     public class PokemonFull
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public string species { get; set; }
         public string main_sprite { get; set; }
@@ -38,6 +39,13 @@ namespace PokemonGP.Models
         public int attack { get; set; }
         public int defense { get; set; }
         public string type { get; set; }
+        public int battle_score { get; set; }
+    }
+
+    public class EnemyObject
+    {
+        public PokemonFull pokemon { get; set; }
+        public int level { get; set; }
     }
 
     public class UserDB
@@ -83,12 +91,12 @@ namespace PokemonGP.Models
             }
         }
 
-        public static List<PokemonMembers> listMembers(int userID)
+        public static List<PokemonMembers> listMembers()
         {
             List<PokemonMembers> result = null;
             using (PokemonContext ctx = new PokemonContext())
             {
-                result = ctx.MemberStorage.Where(s => s.userid == userID).ToList();
+                result = ctx.MemberStorage.ToList();
             }
             return result;
         }
@@ -151,6 +159,35 @@ namespace PokemonGP.Models
                 return member;
             }
         }
+
+        public static EnemyObject GetRandomEnemy(int battlescore)
+        {
+            List<PokemonFull> result = null;
+            Random random = new Random();
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                double minBattlescore = Math.Floor(battlescore * 0.8);
+                double maxBattlescore = Math.Floor(battlescore * 1.2);
+                result = ctx.PokemonFullList.Where(s => (minBattlescore <= Math.Floor(s.battle_score * Math.Pow(1.02, 3)) && maxBattlescore >= Math.Floor(s.battle_score * Math.Pow(1.02, 3))) || (Math.Floor(s.battle_score * Math.Pow(1.02, 3)) <= minBattlescore && Math.Floor(s.battle_score * Math.Pow(3, 3)) >= minBattlescore)).ToList();
+                int n = random.Next(result.Count);
+                PokemonFull pokemon = result[n];
+                int minLevel = (int)Math.Ceiling((Math.Pow((double)minBattlescore / pokemon.battle_score, (double)1 / 3) - 1) * 50);
+                int maxLevel = (int)Math.Floor((Math.Pow((double)maxBattlescore / pokemon.battle_score, (double)1 / 3) - 1) * 50);
+                if (minLevel < 1)
+                {
+                    minLevel = 1;
+                }
+                if (maxLevel > 100)
+                {
+                    maxLevel = 100;
+                }
+                int level = minLevel + random.Next(maxLevel - minLevel + 1);
+                EnemyObject enemy = new EnemyObject();
+                enemy.pokemon = pokemon;
+                enemy.level = level;
+                return enemy;
+            }
+        }
     }
 
     // Database
@@ -191,6 +228,7 @@ namespace PokemonGP.Models
                 newmon.attack = monster.stats[1].base_stat;
                 newmon.defense = monster.stats[2].base_stat;
                 newmon.type = monster.types[0].type.name;
+                newmon.battle_score = monster.stats[0].base_stat * monster.stats[1].base_stat * monster.stats[2].base_stat;
 
                 ctx.PokemonFullList.Add(newmon);
                 ctx.SaveChanges();

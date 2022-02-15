@@ -31,6 +31,9 @@ namespace PokemonGP.Migrations
                     b.Property<int>("base_experience")
                         .HasColumnType("int");
 
+                    b.Property<int>("battle_score")
+                        .HasColumnType("int");
+
                     b.Property<int>("defense")
                         .HasColumnType("int");
 
