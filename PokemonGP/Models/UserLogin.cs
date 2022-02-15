@@ -39,6 +39,8 @@ namespace PokemonGP.Models
         public int defense { get; set; }
         public string type { get; set; }
         public int battle_score { get; set; }
+        public int evolve_to { get; set; }
+        public int evolve_at { get; set; }
     }
 
     public class EnemyObject
@@ -219,11 +221,41 @@ namespace PokemonGP.Models
                 newmon.defense = monster.stats[2].base_stat;
                 newmon.type = monster.types[0].type.name;
                 newmon.battle_score = monster.stats[0].base_stat * monster.stats[1].base_stat * monster.stats[2].base_stat;
+                newmon.evolve_to = 0;
+                newmon.evolve_at = 0;
 
                 ctx.PokemonFullList.Add(newmon);
                 ctx.SaveChanges();
             }
             return true;
+        }
+
+        public static bool UpdateChain(EvolutionsChain chain)
+        {
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                if (chain.chain.evolves_to[0].evolves_to.Length > 0)
+                {
+                    PokemonFull full = ctx.PokemonFullList.Where(s => s.species == chain.chain.species.name).FirstOrDefault();
+                    PokemonFull evolution = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].species.name).FirstOrDefault();
+                    full.evolve_to = evolution.id;
+                    full.evolve_at = chain.chain.evolves_to[0].evolution_details.min_level;
+
+                    ctx.PokemonFullList.Update(full);
+                    ctx.SaveChanges();
+
+                    if (chain.chain.evolves_to[0].evolves_to[0].evolves_to.Length > 0)
+                    {
+                        full = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].species.name).FirstOrDefault();
+                        evolution = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].evolves_to[0].species.name).FirstOrDefault();
+                        full.evolve_to = evolution.id;
+                        full.evolve_at = chain.chain.evolves_to[0].evolves_to[0].evolution_details.min_level;
+
+                    }
+                }
+
+                return true;
+            }
         }
     }
 }

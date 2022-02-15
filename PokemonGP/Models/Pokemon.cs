@@ -116,5 +116,18 @@ namespace PokemonGP.Models
 
             return null;
         }
+
+        public static async Task<EvolutionsChain> UpdateChain()
+        {
+            for (int i = 1; i < 79; i++)
+            {
+                var connection = await MyHttp.GetAsync($"evolution-chain/{i}");
+                EvolutionsChain chain = await connection.Content.ReadAsAsync<EvolutionsChain>();
+
+                PokemonDataBase.UpdateChain(chain);
+            }
+
+            return null;
+        }
     }
 }
