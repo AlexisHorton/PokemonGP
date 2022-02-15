@@ -10,7 +10,7 @@ export class PokemonAPIService {
 
   constructor(private http: HttpClient) { }
 
-  listMembers(userID: number, cb: any ){
+  listMembers(cb: any ){
     this.http.get<Pokemon[]>('https://localhost:44347/pokemon').subscribe(cb)
   }
 
@@ -23,7 +23,7 @@ export class PokemonAPIService {
   }
 
   GetPokemon(cb: any){
-    this.http.get<PokemonFull[]>('https://localhost:44347/userlogin/full_list').subscribe(cb)
+    this.http.get<PokemonFull[]>('https://localhost:44347/pokemon/full_list').subscribe(cb)
   }
 
   GetPokemonFull(id: number, cb: any){

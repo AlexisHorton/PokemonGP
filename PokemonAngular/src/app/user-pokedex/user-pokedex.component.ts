@@ -31,6 +31,17 @@ export class UserPokedexComponent implements OnInit {
     current_hitpoints: 0
   }
 
+  reorganizemon: Pokemon = {
+    id: 0,
+    pokemonid: 0,
+    level: 0,
+    experience: 0,
+    userid: 0,
+    teampos: 0,
+    given_name: '',
+    current_hitpoints: 0
+  }
+
   constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) {
     this.currentUserID = this.userapi.currentUserID;
     this.currentUser = this.userapi.currentUser;
@@ -41,7 +52,7 @@ export class UserPokedexComponent implements OnInit {
   }
 
   refreshList() {
-    this.pokemonapi.listMembers( this.userapi.currentUserID, 
+    this.pokemonapi.listMembers( 
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);
@@ -69,17 +80,40 @@ export class UserPokedexComponent implements OnInit {
     });
   }
   editPokemon(id: number) {
+    if (this.tposition > 6){
+      this.tposition = 0;
+    }
     this.editmon.id = this.poketeam[id - 1].id
     this.editmon.level = this.poketeam[id - 1].level;
+    this.editmon.pokemonid = this.poketeam[id -2].pokemonid;
     this.editmon.experience = this.poketeam[id - 1].experience;
     this.editmon.userid = this.poketeam[id - 1].userid;
     this.editmon.given_name = this.poketeam[id - 1].given_name;
     this.editmon.teampos = this.tposition;
+
+    if (this.tposition > 0)
+    {
+    for (let i: number = 0; i < this.poketeam.length; i++)
+    {
+      if (this.poketeam[i].teampos == this.tposition) {
+        this.reorganizemon.id = this.poketeam[i].id
+        this.reorganizemon.level = this.poketeam[i].level;
+        this.reorganizemon.pokemonid = this.poketeam[i].pokemonid;
+        this.reorganizemon.experience = this.poketeam[i].experience;
+        this.reorganizemon.userid = this.poketeam[i].userid;
+        this.reorganizemon.teampos = 0;
+        this.reorganizemon.given_name = this.poketeam[i].given_name;
+
+        this.pokemonapi.updatePokemon(this.reorganizemon,
+          () => {
+          });
+      }
+    }
     
     this.pokemonapi.updatePokemon(this.editmon,
       () => {
         this.refreshList();
       });
-    }
-
+    } 
+  }
 }

@@ -18,6 +18,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshUserList();
+    this.listPokemon();
   }
 
   refreshUserList(){
@@ -25,12 +26,12 @@ export class HomePageComponent implements OnInit {
       (results: any) => {
         this.allUsers = results;
       }
-    )
-  }
+    );
+  }  
 
   listPokemon(){
     this.pokemonapi.GetPokemon(
-      (results: any) => {
+      (results: PokemonFull[]) => {
         this.allPokemon = results;
       }
     )

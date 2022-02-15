@@ -1,7 +1,24 @@
+<button>
 <a routerLink="/home">Homepage</a>&nbsp;
+</button>
+
+<button>
 <a routerLink="/userlogin">Log In</a>&nbsp;
+</button>
+
+<button>
 <a routerLink="/userhomepage">My Homepage</a>&nbsp;
+</button>
+
+<button>
 <a routerLink="/pokemonbattle">Battle!</a> &nbsp;
+</button>
+
+<ng-container *ngIf="this.currentUserID == 0 ">
+    <button (click)="LogOut()" >
+        LogOut
+    </button>
+</ng-container>
 
 
 <router-outlet></router-outlet>

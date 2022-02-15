@@ -23,7 +23,7 @@ export class StarterPokemonComponent implements OnInit {
   newmon: Pokemon = {
     id: 0,
     pokemonid: 0,
-    userid: this.userapi.currentUserID,
+    userid: this.currentUserID,
     level: 1,
     experience: 0,
     current_hitpoints: 0,
@@ -59,11 +59,13 @@ export class StarterPokemonComponent implements OnInit {
 
   addMember(id : number) {
     this.newmon.pokemonid = this.pokemons[id - 1].id;
+    this.newmon.userid = this.currentUserID;
 
     this.pokemonapi.addPokemon(this.newmon, 
       () => {
         this.refreshList();
     });
+    
       this.hideNaming();
       this.Taken += 1;
       if (this.choice1 == null)

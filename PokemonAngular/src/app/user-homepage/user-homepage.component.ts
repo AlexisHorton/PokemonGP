@@ -21,6 +21,8 @@ export class UserHomepageComponent implements OnInit {
   currentUserID: number = 0;
   current_User: UserLogin | null = null;
 
+  
+
   constructor(private userapi: UserAPIService, private pokemonapi: PokemonAPIService, private router: Router) {
     this.currentUser = this.userapi.currentUser;
    }
@@ -30,7 +32,7 @@ export class UserHomepageComponent implements OnInit {
   }
 
   refreshList() {
-    this.pokemonapi.listMembers( this.currentUserID,
+    this.pokemonapi.listMembers(
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);
@@ -69,12 +71,4 @@ export class UserHomepageComponent implements OnInit {
       }
     )
   }
-
-  LogOut(){
-    window.sessionStorage.clear();
-    this.userapi.currentUser = '';
-    this.userapi.currentUserID = 0;
-    this.router.navigate(["/home"])
-  }
-
 }

@@ -1,11 +1,7 @@
-<h1>Welcome to your Homepage {{ currentUser }}</h1> <button (click)="LogOut()">Log Out</button>
+<h1>Welcome to your Homepage {{ currentUser }}</h1> 
 
 <app-starter-pokemon></app-starter-pokemon>
 
 <app-user-pokedex></app-user-pokedex>
 
-<ng-container *ngFor="let pokemon of pokefull"> 
-    {{ pokemon.main_sprite}}
-
-</ng-container>
 
