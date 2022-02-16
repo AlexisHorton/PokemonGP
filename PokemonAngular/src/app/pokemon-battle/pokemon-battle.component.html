@@ -33,8 +33,6 @@
 
     <button [disabled]="turnPlaying || battleEnding" (click)="PlayTurn(PlayerPokemon, EnemyPokemon)">Attack!</button>
     <button [disabled]="battleEnding" (click)="EndBattle(false)">Run away!</button><br />
-    <button [disabled]="battleEnding" (click)="DisplayItems()">Items!</button>
-    <button [disabled]="battleEnding" (click)="DisplayTeam()">Switch Pokemon!</button>
 </div>
 
 
@@ -54,7 +52,7 @@
                 {{pokemon2.species}}<br>
                 Lvl.{{pokemon.level}}<br>
                 Position {{pokemon.teampos}}
-                <button (click)="SwapPosition(pokemon.id)">Swap In</button>
+                <button [disabled]="battleEnding" (click)="SwapPosition(pokemon.id)">Swap In</button>
                 </div></div>
             </td>
         </tr>

@@ -1,36 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {}
+    "C:\\Users\\sjmis\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {
+    "C:\\Users\\sjmis\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+        "projectUniqueName": "C:\\Users\\sjmis\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
         "projectName": "PokemonGP",
-        "projectPath": "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
-        "packagesPath": "C:\\Users\\Dans-LT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dans-LT\\Desktop\\New folder\\PokemonGP\\PokemonGP\\obj\\",
+        "projectPath": "C:\\Users\\sjmis\\source\\repos\\PokemonGP\\PokemonGP\\PokemonGP.csproj",
+        "packagesPath": "C:\\Users\\sjmis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sjmis\\source\\repos\\PokemonGP\\PokemonGP\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Dans-LT\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\sjmis\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +37,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.AspNet.WebApi.Client": {
               "target": "Package",
@@ -75,12 +71,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.20, 3.1.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -89,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
