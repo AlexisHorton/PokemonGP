@@ -153,7 +153,7 @@ namespace PokemonGP.Models
             }
         }
 
-        public static EnemyObject GetRandomEnemy(int battlescore)
+        public static EnemyObject GetRandomEnemy(int battlescore, int avglevel)
         {
             List<PokemonFull> result = null;
             Random random = new Random();
@@ -161,7 +161,9 @@ namespace PokemonGP.Models
             {
                 double minBattlescore = Math.Floor(battlescore * 0.8);
                 double maxBattlescore = Math.Floor(battlescore * 1.2);
-                result = ctx.PokemonFullList.Where(s => (minBattlescore <= Math.Floor(s.battle_score * Math.Pow(1.02, 3)) && maxBattlescore >= Math.Floor(s.battle_score * Math.Pow(1.02, 3))) || (Math.Floor(s.battle_score * Math.Pow(1.02, 3)) <= minBattlescore && Math.Floor(s.battle_score * Math.Pow(3, 3)) >= minBattlescore)).ToList();
+                double minRange = Math.Pow(1 + ((avglevel - 5) / 50), 3);
+                double maxRange = Math.Pow(1 + ((avglevel + 5) / 50), 3);
+                result = ctx.PokemonFullList.Where(s => (minBattlescore <= Math.Floor(s.battle_score * minRange) && maxBattlescore >= Math.Floor(s.battle_score * minRange)) || (Math.Floor(s.battle_score * minRange) <= minBattlescore && Math.Floor(s.battle_score * maxRange) >= minBattlescore)).ToList();
                 int n = random.Next(result.Count);
                 PokemonFull pokemon = result[n];
                 int minLevel = (int)Math.Ceiling((Math.Pow((double)minBattlescore / pokemon.battle_score, (double)1 / 3) - 1) * 50);

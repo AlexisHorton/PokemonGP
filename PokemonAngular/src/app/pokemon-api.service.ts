@@ -34,7 +34,7 @@ export class PokemonAPIService {
 		this.http.put<Pokemon>('https://localhost:5001/pokemon', pokemon).subscribe(cb);
 	}
 
-  GetEnemyPokemon(battlescore: number, cb: any) {
-    this.http.get<PokemonFull>(`https://localhost:5001/pokemon/enemy?battlescore=${battlescore}`).subscribe(cb);
+  GetEnemyPokemon(battlescore: number, avglevel: number, cb: any) {
+    this.http.get<PokemonFull>(`https://localhost:5001/pokemon/enemy?battlescore=${battlescore}&avglevel=${avglevel}`).subscribe(cb);
   }
 }

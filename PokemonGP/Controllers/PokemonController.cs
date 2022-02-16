@@ -62,9 +62,9 @@ namespace PokemonGP.Controllers
 
         [HttpGet]
         [Route("enemy")]
-        public EnemyObject GetRandomEnemy(int battlescore)
+        public EnemyObject GetRandomEnemy(int battlescore, int avglevel)
         {
-            return UserDB.GetRandomEnemy(battlescore);
+            return UserDB.GetRandomEnemy(battlescore, avglevel);
         }
 
         [HttpPut]

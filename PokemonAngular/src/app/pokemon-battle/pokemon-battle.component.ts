@@ -220,6 +220,15 @@ export class PokemonBattleComponent implements OnInit {
         return average;
     }
 
+    GetAverageTeamLevel() {
+        let sum: number = 0;
+        for (let i = 0; i < this.PlayerTeam.length; i++) {
+            sum += this.PlayerTeam[i].level;
+        }
+        let average: number = Math.floor(sum / this.PlayerTeam.length);
+        return average;
+    }
+
     DisplayItems() {
 
     }
