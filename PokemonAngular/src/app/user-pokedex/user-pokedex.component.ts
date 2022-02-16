@@ -17,6 +17,7 @@ export class UserPokedexComponent implements OnInit {
   selected: number | null = null;
   currentUserID : number = 0;
   currentUser: string = '';  
+  teamcount: number = 0;
   tposition: number = 0;
 
 
@@ -52,11 +53,12 @@ export class UserPokedexComponent implements OnInit {
   }
 
   refreshList() {
-    this.pokemonapi.listMembers( 
+    this.userapi.listTeam(this.currentUserID,
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);
           this.poketeam = result;
+          this.userapi.teamcount = this.poketeam.length;
         }
       );
       this.pokemonapi.GetPokemon(
@@ -79,6 +81,7 @@ export class UserPokedexComponent implements OnInit {
       this.refreshList();
     });
   }
+  
   editPokemon(id: number) {
     if (this.tposition > 6){
       this.tposition = 0;

@@ -1,7 +1,7 @@
 <h1>Your Team: </h1> 
 <ng-container *ngFor="let pokemon of poketeam">
 
-    <ng-container *ngIf="pokemon.teampos == 1">
+    <ng-container *ngIf="pokemon.teampos < 7">
 <table width=100%; style=" float: left; border: black;" align="center">
     <thead>
             <tr>
@@ -22,107 +22,6 @@
 </table>
 </ng-container>
 
-<ng-container *ngIf="pokemon.teampos == 2">
-    <table width=100; style=" float: left; border: black;" align="center">
-        <thead>
-            <tr>
-                <td align="center">
-                    <div *ngFor="let pokemon2 of pokefull">
-                        <div *ngIf="pokemon.pokemonid == pokemon2.id">
-                    <img src="{{pokemon2.main_sprite}}"><br>
-                    {{pokemon.given_name}}<br>
-                    # {{pokemon.pokemonid}}<br>
-                    {{pokemon2.species}}<br>
-                    Lvl.{{pokemon.level}}<br>
-                    Position {{pokemon.teampos}}<br>
-                    <button (click)="lookAtThis(pokemon.id)">more info</button>
-                    </div></div>
-                </td>
-            </tr>
-       </thead>
-    </table>
-    </ng-container>
-    <ng-container *ngIf="pokemon.teampos == 3">
-        <table width=100; style=" float: left; border: black;" align="center">
-            <thead>
-                <tr>
-                    <td align="center">
-                        <div *ngFor="let pokemon2 of pokefull">
-                            <div *ngIf="pokemon.pokemonid == pokemon2.id">
-                        <img src="{{pokemon2.main_sprite}}"><br>
-                        {{pokemon.given_name}}<br>
-                        # {{pokemon.pokemonid}}<br>
-                        {{pokemon2.species}}<br>
-                        Lvl.{{pokemon.level}}<br>
-                        Position {{pokemon.teampos}}<br>
-                        <button (click)="lookAtThis(pokemon.id)">more info</button>
-                        </div></div>
-                    </td>
-                </tr>
-           </thead>
-        </table>
-        </ng-container>
-        <ng-container *ngIf="pokemon.teampos == 4">
-            <table width=100; style=" float: left; border: black;" align="center">
-                <thead>
-                    <tr>
-                        <td align="center">
-                            <div *ngFor="let pokemon2 of pokefull">
-                                <div *ngIf="pokemon.pokemonid == pokemon2.id">
-                            <img src="{{pokemon2.main_sprite}}"><br>
-                            {{pokemon.given_name}}<br>
-                            # {{pokemon.pokemonid}}<br>
-                            {{pokemon2.species}}<br>
-                            Lvl.{{pokemon.level}}<br>
-                            Position {{pokemon.teampos}}<br>
-                            <button (click)="lookAtThis(pokemon.id)">more info</button>
-                            </div></div>
-                        </td>
-                    </tr>
-               </thead>
-            </table>
-            </ng-container>
-            <ng-container *ngIf="pokemon.teampos == 5">
-                <table width=100; style=" float: left; border: black;" align="center">
-                    <thead>
-                        <tr>
-                            <td align="center">
-                                <div *ngFor="let pokemon2 of pokefull">
-                                    <div *ngIf="pokemon.pokemonid == pokemon2.id">
-                                <img src="{{pokemon2.main_sprite}}"><br>
-                                {{pokemon.given_name}}<br>
-                                # {{pokemon.pokemonid}}<br>
-                                {{pokemon2.species}}<br>
-                                Lvl.{{pokemon.level}}<br>
-                                Position {{pokemon.teampos}}<br>
-                                <button (click)="lookAtThis(pokemon.id)">more info</button>
-                                </div></div>
-                            </td>
-                        </tr>
-                   </thead>
-                </table>
-                </ng-container>
-                <ng-container *ngIf="pokemon.teampos == 6">
-                    <table width=100; style=" float: left; border: black;" align="center">
-                        <thead>
-                            <tr>
-                                <td align="center">
-                                    <div *ngFor="let pokemon2 of pokefull">
-                                        <div *ngIf="pokemon.pokemonid == pokemon2.id">
-                                    <img src="{{pokemon2.main_sprite}}"><br>
-                                    {{pokemon.given_name}}<br>
-                                    # {{pokemon.pokemonid}}<br>
-                                    {{pokemon2.species}}<br>
-                                    Lvl.{{pokemon.level}}<br>
-                                    Position {{pokemon.teampos}}<br>
-                                    <button (click)="lookAtThis(pokemon.id)">more info</button>
-                                    </div></div>
-                                </td>
-                            </tr>
-                       </thead>
-                    </table>
-                    </ng-container>
-</ng-container>
 <table width="100%"></table>
 <h1>Your PokeDex:</h1> 
 <ng-container *ngFor="let pokemon of poketeam">
@@ -155,6 +54,7 @@
 </table>
 </ng-container>
 </ng-container>
+
 <table width="100%"></table>
 <ng-container *ngFor="let pokemon of poketeam">
     <ng-container *ngIf="pokemon.userid == currentUserID">

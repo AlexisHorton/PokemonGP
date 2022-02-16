@@ -10,4 +10,6 @@ export interface PokemonFull {
     defense: number;
     type: string;
     battle_score: number;
+    evolve_to: number;
+    evolve_at: number;
 }

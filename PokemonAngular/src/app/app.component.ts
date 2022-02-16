@@ -23,7 +23,6 @@ LogOut(){
   this.userapi.currentUser = '';
   this.userapi.currentUserID = 0;
   this.router.navigate(["/home"])
-}
-
+ }
 }
 
