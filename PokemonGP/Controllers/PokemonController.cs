@@ -65,5 +65,12 @@ namespace PokemonGP.Controllers
         {
             return UserDB.GetRandomEnemy(battlescore);
         }
+
+        [HttpPut]
+        [Route("full_list")]
+        public Task<EvolutionsChain> UpdateChain()
+        {
+            return PokemonAPI.UpdateChain();
+        }
     }
 }

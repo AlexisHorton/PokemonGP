@@ -60,21 +60,14 @@ namespace PokemonGP.Models
 
     public class EvolveArray1
     {
-        public EvolveDetails evolution_details { get; set; }
+        public EvolveDetails[] evolution_details { get; set; }
         public EvolveSpecies species { get; set; }
         public EvolveArray2[] evolves_to { get; set; }
     }
 
     public class EvolveArray2
     {
-        public EvolveDetails evolution_details { get; set; }
-        public EvolveSpecies species { get; set; }
-        public EvolveArray3[] evolves_to { get; set; }
-    }
-
-    public class EvolveArray3
-    {
-        public EvolveDetails evolution_details { get; set; }
+        public EvolveDetails[] evolution_details { get; set; }
         public EvolveSpecies species { get; set; }
     }
 
@@ -111,6 +104,21 @@ namespace PokemonGP.Models
                 Pokemon pokemon2 = await connection.Content.ReadAsAsync<Pokemon>();
 
                 PokemonDataBase.AddToFull(pokemon2);
+            }
+
+            return null;
+        }
+        public static async Task<EvolutionsChain> UpdateChain()
+        {
+            for (int i = 1; i < 79; i++)
+            {
+                if (i != 67)
+                {
+                    var connection = await MyHttp.GetAsync($"evolution-chain/{i}");
+                    EvolutionsChain chain = await connection.Content.ReadAsAsync<EvolutionsChain>();
+
+                    PokemonDataBase.UpdateChain(chain);
+                }
             }
 
             return null;

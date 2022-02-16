@@ -40,6 +40,8 @@ namespace PokemonGP.Models
         public int defense { get; set; }
         public string type { get; set; }
         public int battle_score { get; set; }
+        public int evolve_to { get; set; }
+        public int evolve_at { get; set; }
     }
 
     public class EnemyObject
@@ -218,7 +220,6 @@ namespace PokemonGP.Models
                     return false;
                 }
                 PokemonFull newmon = new PokemonFull();
-                newmon.id = monster.id;
                 newmon.species = monster.species.name;
                 newmon.main_sprite = monster.sprites.front_default;
                 newmon.height = monster.height;
@@ -234,6 +235,55 @@ namespace PokemonGP.Models
                 ctx.SaveChanges();
             }
             return true;
+        }
+        public static bool UpdateChain(EvolutionsChain chain)
+        {
+            using (PokemonContext ctx = new PokemonContext())
+            {
+                if (chain.chain.evolves_to.Length > 0)
+                {
+                    PokemonFull full = ctx.PokemonFullList.Where(s => s.species == chain.chain.species.name).FirstOrDefault();
+                    PokemonFull evolution = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].species.name).FirstOrDefault();
+                    if (full != null && evolution != null)
+                    {
+                        full.evolve_to = evolution.id;
+                        if (chain.chain.evolves_to[0].evolution_details[0].min_level != null)
+                        {
+                            full.evolve_at = (int)chain.chain.evolves_to[0].evolution_details[0].min_level;
+                        }
+                        else
+                        {
+                            full.evolve_at = 16;
+                        }
+
+                        ctx.PokemonFullList.Update(full);
+                        ctx.SaveChanges();
+                    }
+                }
+                if (chain.chain.evolves_to.Length > 0 && chain.chain.evolves_to[0].evolves_to.Length > 0)
+                {
+                    PokemonFull full = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].species.name).FirstOrDefault();
+                    PokemonFull evolution = ctx.PokemonFullList.Where(s => s.species == chain.chain.evolves_to[0].evolves_to[0].species.name).FirstOrDefault();
+                    if (full != null && evolution != null)
+                    {
+                        full.evolve_to = evolution.id;
+                        if (chain.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level != null)
+                        {
+                            full.evolve_at = (int)chain.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level;
+                        }
+                        else
+                        {
+                            full.evolve_at = 36;
+                        }
+
+                        ctx.PokemonFullList.Update(full);
+                        ctx.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+
         }
     }
 }

@@ -37,6 +37,12 @@ namespace PokemonGP.Migrations
                     b.Property<int>("defense")
                         .HasColumnType("int");
 
+                    b.Property<int>("evolve_at")
+                        .HasColumnType("int");
+
+                    b.Property<int>("evolve_to")
+                        .HasColumnType("int");
+
                     b.Property<int>("height")
                         .HasColumnType("int");
 

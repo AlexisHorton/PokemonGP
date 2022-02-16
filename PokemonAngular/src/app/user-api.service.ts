@@ -12,6 +12,7 @@ export class UserAPIService {
   currentUser: string = '';
   currentUserID: number = 0;
   current_User: UserLogin | null = null;
+  teamcount: number = 0;
 
   constructor(private http: HttpClient) { }
 
