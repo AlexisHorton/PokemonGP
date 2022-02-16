@@ -1,7 +1,6 @@
 
-
-<br>{{currentUserID}}<br><br>
-<ng-container *ngIf="Taken < 2">
+<ng-container *ngIf="currentUserID > 0">
+<ng-container *ngIf="Taken <= 2">
     Choose {{ToBeTaken - Taken}}
 
     <table><tr><td>
@@ -31,4 +30,5 @@
 <button (click)=" hideNaming()" *ngIf="PickThisOne">Nevermind</button>
 <div *ngIf="PickThisOne">Name:<input type="text" [(ngModel)]="newmon.given_name"></div>
 </td></tr></table>
+</ng-container>
 </ng-container>

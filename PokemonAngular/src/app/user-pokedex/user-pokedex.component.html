@@ -1,8 +1,8 @@
 
 <h1>Your Team:</h1> 
-<ng-container *ngFor="let pokemon of poketeam">
+<ng-container *ngFor="let pokemon of pokeall">
     
-    <ng-container *ngIf="pokemon.teampos < 7">
+    <ng-container *ngIf="pokemon.teampos < 7 && pokemon.teampos > 0 && pokemon.userid == currentUserID">
 <table width=100; style=" float: left; border: black;" align="center">
     <thead>
         <tr>
@@ -22,11 +22,10 @@
    </thead>
 </table>
 </ng-container>
-
 </ng-container>
 <table width="100%"></table>
 <h1>Your PokeDex:</h1> 
-<ng-container *ngFor="let pokemon of poketeam">
+<ng-container *ngFor="let pokemon of pokeall">
     <ng-container *ngIf="pokemon.id == selected">
 <table style=" float: left; border: black;" align="center">
     <thead>
@@ -57,7 +56,7 @@
 </ng-container>
 </ng-container>
 <table width="100%"></table>
-<ng-container *ngFor="let pokemon of poketeam">
+<ng-container *ngFor="let pokemon of pokeall">
     <ng-container *ngIf="pokemon.userid == currentUserID">
             <table width=100; style=" float: left; border: black;" align="center">
                  <thead>

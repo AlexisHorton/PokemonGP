@@ -61,7 +61,7 @@ export class UserLoginComponent implements OnInit {
     this.newUser.password = '';
   }
 
-  signIn(){
+  LogIn(){
     this.userapi.GetAUser(this.loginUser, this.loginPassword, 
       (result: any) => {
         if (result) {
@@ -69,10 +69,9 @@ export class UserLoginComponent implements OnInit {
           this.Route.navigate(["/userhomepage"])
         }
         else {
-          alert('Sorry, that did not match');
+          alert('Invalid credentials!');
         }
     })
-    
   }
 
 

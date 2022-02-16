@@ -14,6 +14,7 @@ export class UserPokedexComponent implements OnInit {
 
   moreinfo: boolean = false;
   poketeam: Pokemon[] = [];
+  pokeall: Pokemon[] = [];
   pokefull: PokemonFull[] = [];
   selected: number | null = null;
   currentUserID : number = 0;
@@ -53,11 +54,18 @@ export class UserPokedexComponent implements OnInit {
   }
 
   refreshList() {
-    this.userapi.listTeam(this.currentUserID,
+    this.pokemonapi.listMembers(
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);
           this.poketeam = result;
+        }
+      )
+      this.pokemonapi.listMembers(
+        (result: Pokemon[]) => {
+          console.log('Results!')
+          console.log(result);
+          this.pokeall = result;
           this.userapi.teamcount = this.poketeam.length;
         }
       )
@@ -68,6 +76,8 @@ export class UserPokedexComponent implements OnInit {
           this.pokefull = resultb;
         }
       )
+      this.poketeam.sort((a, b) => a.teampos - b.teampos)
+      this.pokeall.sort((a, b) => a.teampos - b.teampos)
   }
 
   lookAtThis(id : number){
@@ -87,19 +97,28 @@ export class UserPokedexComponent implements OnInit {
     if (this.tposition > 6){
       this.tposition = 0;
     }
-    this.editmon.id = this.poketeam[id -1].id
-    this.editmon.level = this.poketeam[id -1].level;
-    this.editmon.pokemonid = this.poketeam[id -1].pokemonid;
-    this.editmon.experience = this.poketeam[id -1].experience;
-    this.editmon.userid = this.poketeam[id -1].userid;
+    for (let i: number = 0; i < this.poketeam.length; i++)
+    {
+      if (this.poketeam[i].id == id){
+        console.log(this.poketeam[i].id)
+    this.editmon.id = this.poketeam[i].id;
+    this.editmon.level = this.poketeam[i].level;
+    this.editmon.pokemonid = this.poketeam[i].pokemonid;
+    this.editmon.experience = this.poketeam[i].experience;
+    this.editmon.userid = this.poketeam[i].userid;
     this.editmon.teampos = this.tposition;
-    this.editmon.given_name = this.poketeam[id -1].given_name;
+    this.editmon.given_name = this.poketeam[i].given_name;
+
+
+      }
+    }
+    
     if (this.tposition > 0)
     {
     for (let i: number = 0; i < this.poketeam.length; i++)
     {
       if (this.poketeam[i].teampos == this.tposition) {
-        this.reorganizemon.id = this.poketeam[i].id
+        this.reorganizemon.id = this.poketeam[i].id;
         this.reorganizemon.level = this.poketeam[i].level;
         this.reorganizemon.pokemonid = this.poketeam[i].pokemonid;
         this.reorganizemon.experience = this.poketeam[i].experience;
@@ -107,12 +126,13 @@ export class UserPokedexComponent implements OnInit {
         this.reorganizemon.teampos = 0;
         this.reorganizemon.given_name = this.poketeam[i].given_name;
 
+        console.log(this.reorganizemon)
         this.pokemonapi.updatePokemon(this.reorganizemon,
           () => {
           });
       }
     }
-
+    console.log(this.editmon)
     this.pokemonapi.updatePokemon(this.editmon,
       () => {
         this.refreshList();

@@ -1,9 +1,10 @@
-<div style="font-family: 'Pokemon Solid', sans-serif;">
-    <h1>Sign in</h1>
-    <p>Username: <input type="text" [(ngModel)]="loginUser" /> </p>
-    <p>Password: <input type="text" [(ngModel)]="loginPassword" /></p>
-    <button (click)="signIn()">Sign In</button> 
-
+<div style="font-family: 'Pokemon Solid', sans-serif; margin: auto;  width: 60%;  border: 5px solid #0949d1;
+padding: 10px; background-color: rgb(189, 229, 252);">
+    <h1 style="margin: auto; width: 30%; padding: 10px;">Log in</h1>
+    <p style="margin: auto; width: 30%; padding: 10px;">Username: <input type="text" [(ngModel)]="loginUser" /> </p>
+    <p style="margin: auto; width: 30%; padding: 10px;">Password: <input type="text" [(ngModel)]="loginPassword" /></p>
+   <div style="margin: auto; width: 30%; padding: 10px;"> <button  style="width: 40%; padding: 5px;" (click)="LogIn()">Log In</button> 
+   </div>
     <p>No profile? <button (click)="YesCreateButton()">Create one!</button> </p>
     <ng-container *ngIf="showCreateButton">
     <p>Username: <input type="text" [(ngModel)]="newUser.username"/> </p>

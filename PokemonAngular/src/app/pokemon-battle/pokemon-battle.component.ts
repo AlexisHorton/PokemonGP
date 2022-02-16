@@ -21,8 +21,6 @@ export class PokemonBattleComponent implements OnInit {
     PlayerPokemonFull: PokemonFull | null = null;
     EnemyPokemon: BattlePokemon | null = null;
     EnemyPokemonFull: PokemonFull | null = null;
-    teamposition: number = 0;
-    swappokemon: Pokemon | null = null;
  
     inBattle: boolean = false;
     turnPlaying: boolean = false;
@@ -42,9 +40,9 @@ export class PokemonBattleComponent implements OnInit {
         let currentPokemon: Pokemon | undefined = this.GetStarter()
         if (currentPokemon && this.PlayerPokemon && this.EnemyPokemon) {
             let savePokemon: Pokemon = currentPokemon
-			if (this.PlayerPokemonFull && this.EnemyPokemonFull) {
-				savePokemon.current_hitpoints = this.PlayerPokemon.current_hitpoints
-				if (won) {
+            if (this.PlayerPokemonFull && this.EnemyPokemonFull) {
+                savePokemon.current_hitpoints = this.PlayerPokemon.current_hitpoints
+                if (won) {
                     if (savePokemon.level < 100) {
                         savePokemon.experience += this.EnemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level / 5))
                         while (savePokemon.experience > Math.pow(savePokemon.level, 3) && savePokemon.level < 100) {
@@ -59,15 +57,27 @@ export class PokemonBattleComponent implements OnInit {
                     else {
                         savePokemon.experience = 0
                     }
-					
-				}
-				this.pokemonapi.updatePokemon(savePokemon, () => {
-					this.RefreshTeam()
-				})
-				this.EnemyPokemon = null;
-				this.EnemyPokemonFull = null;
+                    if (this.GetRandomInt(5) < 1) {
+                        let earnedPokemon: Pokemon = {
+                            id: 0,
+                            pokemonid: this.EnemyPokemonFull.id,
+                            userid: this.GetUserID(),
+                            level: this.EnemyPokemon.level,
+                            experience: 0,
+                            current_hitpoints: 0,
+                            teampos: 0,
+                            given_name: this.EnemyPokemon.species
+                        }
+                        this.pokemonapi.addPokemon(earnedPokemon, () => {})
+                    }
+                }
+                this.pokemonapi.updatePokemon(savePokemon, () => {
+                    this.RefreshTeam()
+                })
+                this.EnemyPokemon = null;
+                this.EnemyPokemonFull = null;
                 this.turnPlaying = false;
-			}
+            }
         }
     }
 
@@ -87,6 +97,8 @@ export class PokemonBattleComponent implements OnInit {
  
     GetPlayerPokemonHitpoints(id: number) {
         for (let i = 0; i < this.PlayerTeam.length; i++) {
+            console.log(this.PlayerTeam[i].id, id)
+            console.log(this.PlayerTeam[i].current_hitpoints)
             if (this.PlayerTeam[i].id == id) {
                 return this.PlayerTeam[i].current_hitpoints;
             }
@@ -185,6 +197,12 @@ export class PokemonBattleComponent implements OnInit {
             else {
                 target.current_hitpoints -= damage;
                 if (target == this.PlayerPokemon) {
+                    let playerPokemon: Pokemon | null = this.GetPokemonFromID(target.id);
+                    if (playerPokemon) {
+                        playerPokemon.current_hitpoints = target.current_hitpoints;
+                    }
+                }
+                if (target == this.PlayerPokemon) {
                     setTimeout(() => {
                         this.turnPlaying = false;
                     }, 500)
@@ -223,40 +241,48 @@ export class PokemonBattleComponent implements OnInit {
         return average;
     }
 
-    DisplayItems() {
-
-    }
-
-    DisplayTeam() {
-
-    }
     SwapPosition(id: number) {
+        let swapInPos: number = this.GetTeamPosFromID(id);
+        let swapInPokemon: Pokemon | null = this.GetPokemonFromID(id)
+        let starter: Pokemon | undefined = this.GetStarter()
+        if (starter && swapInPokemon) {
+            starter.teampos = swapInPos;
+            swapInPokemon.teampos = 1;
+            this.pokemonapi.updatePokemon(starter, () => {})
+            this.pokemonapi.updatePokemon(swapInPokemon, () => {})
+            this.PlayerTeam.sort((a, b) => a.teampos - b.teampos)
+            let playerPokemonFull: PokemonFull | null = this.GetPlayerPokemonFull(swapInPokemon.pokemonid)
+            if (playerPokemonFull) {
+                this.PlayerPokemon = this.CreateBattlePokemonProfile(swapInPokemon.id, playerPokemonFull, swapInPokemon.level, true)
+            }
+            this.PlayerPokemonFull = playerPokemonFull;
+        }
+    }
+
+    GetTeamPosFromID(id: number){
         for (let i: number = 0; i < this.PlayerTeam.length; i++) {
             if (this.PlayerTeam[i].id == id) {
-                this.teamposition = this.PlayerTeam[i].teampos
-                this.PlayerTeam[i].teampos = 1;
-                this.pokemonapi.updatePokemon(this.PlayerTeam[i], () => {})
-            }
-            else if (this.PlayerTeam[i].teampos == 1) {
-                this.swappokemon = this.PlayerTeam[i]
+                return this.PlayerTeam[i].teampos
             }
         }
-        if (this.swappokemon) {
-            this.swappokemon.teampos = this.teamposition
-            console.log(this.teamposition)
-            this.pokemonapi.updatePokemon(this.swappokemon, () => {});
+        return 0;
+    }
+    
+    GetPokemonFromID(id: number) {
+        for (let i: number = 0; i < this.PlayerTeam.length; i++) {
+            if (this.PlayerTeam[i].id == id) {
+                return this.PlayerTeam[i]
+            }
         }
-        this.PlayerPokemon = null;
-        this.PlayerPokemonFull = null;
-        this.RefreshTeam();
-        let playerPokemon: Pokemon | undefined = this.GetStarter();
-        if (playerPokemon != undefined) {
-            this.GetPokemonFull(playerPokemon.pokemonid, (playerResult: PokemonFull) => {
-                this.PlayerPokemonFull = playerResult
-				if (playerPokemon && playerResult) {
-					this.PlayerPokemon = this.CreateBattlePokemonProfile(playerPokemon.id, playerResult, playerPokemon.level, true);
-				}
-            });
+        return null;
+    }
+
+    GetPlayerPokemonFull(pokemonid: number) {
+        for (let i = 0; i < this.PokemonFullList.length; i++) {
+            if (this.PokemonFullList[i].id == pokemonid) {
+                return this.PokemonFullList[i]
+            }
         }
+        return null;
     }
 }
