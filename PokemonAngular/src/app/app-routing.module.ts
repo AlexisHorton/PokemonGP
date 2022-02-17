@@ -7,6 +7,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { PokemonBattleComponent } from './pokemon-battle/pokemon-battle.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { UserPokedexComponent } from './user-pokedex/user-pokedex.component';
 
 const routes: Routes = [
   { path: 'userlogin', component: UserLoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'userhomepage', component: UserHomepageComponent },
   { path: 'pokemonbattle', component: PokemonBattleComponent},
+  { path: 'pokedex', component: UserPokedexComponent},
   { path: '**', component: AppComponent  }
 ];
 

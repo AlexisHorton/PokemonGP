@@ -57,7 +57,7 @@ export class PokemonBattleComponent implements OnInit {
                     else {
                         savePokemon.experience = 0
                     }
-                    if (this.GetRandomInt(5) < 1) {
+                    if (this.GetRandomInt(1) < 1) {
                         let earnedPokemon: Pokemon = {
                             id: 0,
                             pokemonid: this.EnemyPokemonFull.id,
