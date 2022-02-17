@@ -51,22 +51,25 @@ export class UserPokedexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.refreshList();
   }
 
   refreshList() {
-    this.pokemonapi.listMembers(
+    this.pokemonapi.listMembers(this.currentUserID,
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);
           this.poketeam = result;
         }
       )
-      this.pokemonapi.listMembers(
-        (result: Pokemon[]) => {
+      this.pokemonapi.listMembers(this.currentUserID,
+        (result: Pokemon[]) => {this.currentUserID
           console.log('Results!')
           console.log(result);
           this.pokeall = result;
-          this.userapi.teamcount = this.poketeam.length;
+          if (this.currentUserID > 0) {
+            this.userapi.teamcount = this.poketeam.length;
+          }
         }
       )
       this.pokemonapi.GetPokemon(

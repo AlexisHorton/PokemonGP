@@ -3,6 +3,7 @@ import { UserLogin } from './user-login';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserAPIService } from './user-api.service';
 import { Router } from '@angular/router';
+import { PokemonAPIService } from './pokemon-api.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ constructor(private userapi: UserAPIService, private router: Router) {
     window.sessionStorage.clear();
     this.userapi.currentUser = '';
     this.userapi.currentUserID = 0;
+    this.userapi.teamcount = 0;
     this.router.navigate(["/home"])
   }
 }

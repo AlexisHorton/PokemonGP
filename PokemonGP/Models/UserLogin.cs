@@ -92,12 +92,12 @@ namespace PokemonGP.Models
             }
         }
 
-        public static List<PokemonMembers> listMembers()
+        public static List<PokemonMembers> listMembers(int userid)
         {
             List<PokemonMembers> result = null;
             using (PokemonContext ctx = new PokemonContext())
             {
-                result = ctx.MemberStorage.ToList();
+                result = ctx.MemberStorage.Where(s => s.userid == userid).ToList();
             }
             return result;
         }

@@ -36,7 +36,7 @@ export class UserHomepageComponent implements OnInit {
   }
 
   refreshList() {
-    this.pokemonapi.listMembers(
+    this.pokemonapi.listMembers(this.currentUserID,
         (result: Pokemon[]) => {
           console.log('Results!')
           console.log(result);

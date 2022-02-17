@@ -15,9 +15,9 @@ namespace PokemonGP.Controllers
     public class PokemonController : ControllerBase
     {
         [HttpGet]
-        public List<PokemonMembers> listMembers()
+        public List<PokemonMembers> listMembers(int userid)
         {
-            return UserDB.listMembers();
+            return UserDB.listMembers(userid);
         }
 
         [HttpPost]

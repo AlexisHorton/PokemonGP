@@ -12,8 +12,8 @@ export class PokemonAPIService {
 
   constructor(private http: HttpClient) { }
 
-  listMembers(cb: any ){
-    this.http.get<Pokemon[]>(`${environment.apiUrl}/pokemon`).subscribe(cb)
+  listMembers(userid: number, cb: any ){
+    this.http.get<Pokemon[]>(`${environment.apiUrl}/pokemon?userid=${userid}`).subscribe(cb)
   }
 
   addPokemon(newMember: Pokemon, cb: any){

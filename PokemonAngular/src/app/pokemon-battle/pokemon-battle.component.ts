@@ -44,7 +44,7 @@ export class PokemonBattleComponent implements OnInit {
                 savePokemon.current_hitpoints = this.PlayerPokemon.current_hitpoints
                 if (won) {
                     if (savePokemon.level < 100) {
-                        savePokemon.experience += this.EnemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level))
+                        savePokemon.experience += this.EnemyPokemonFull.base_experience * (1 + this.EnemyPokemon.level)
                         while (savePokemon.experience > Math.pow(savePokemon.level, 3) && savePokemon.level < 100) {
                             savePokemon.experience -= Math.pow(savePokemon.level, 3)
                             savePokemon.level++

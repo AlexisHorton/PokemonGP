@@ -39,11 +39,12 @@ export class StarterPokemonComponent implements OnInit {
   constructor(private pokemonapi: PokemonAPIService, private userapi: UserAPIService) { 
     this.refreshList();
     this.currentUserID = this.userapi.currentUserID;
-        this.currentUser = this.userapi.currentUser;
-        this.Taken = this.userapi.teamcount;
   }
 
   ngOnInit(): void {
+    this.currentUserID = this.userapi.currentUserID;
+        this.currentUser = this.userapi.currentUser;
+        this.Taken = this.userapi.teamcount;
   }
   refreshList() {
     this.pokemonapi.GetPokemon(
