@@ -76,8 +76,6 @@ export class UserPokedexComponent implements OnInit {
           this.pokefull = resultb;
         }
       )
-      this.poketeam.sort((a, b) => a.teampos - b.teampos)
-      this.pokeall.sort((a, b) => a.teampos - b.teampos)
   }
 
   lookAtThis(id : number){
@@ -100,7 +98,6 @@ export class UserPokedexComponent implements OnInit {
     for (let i: number = 0; i < this.poketeam.length; i++)
     {
       if (this.poketeam[i].id == id){
-        console.log(this.poketeam[i].id)
     this.editmon.id = this.poketeam[i].id;
     this.editmon.level = this.poketeam[i].level;
     this.editmon.pokemonid = this.poketeam[i].pokemonid;
@@ -109,7 +106,7 @@ export class UserPokedexComponent implements OnInit {
     this.editmon.teampos = this.tposition;
     this.editmon.given_name = this.poketeam[i].given_name;
 
-
+        console.log(this.editmon)
       }
     }
     
@@ -132,7 +129,6 @@ export class UserPokedexComponent implements OnInit {
           });
       }
     }
-    console.log(this.editmon)
     this.pokemonapi.updatePokemon(this.editmon,
       () => {
         this.refreshList();

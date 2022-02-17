@@ -44,7 +44,7 @@ export class PokemonBattleComponent implements OnInit {
                 savePokemon.current_hitpoints = this.PlayerPokemon.current_hitpoints
                 if (won) {
                     if (savePokemon.level < 100) {
-                        savePokemon.experience += this.EnemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level / 5))
+                        savePokemon.experience += this.EnemyPokemonFull.base_experience * Math.floor(1 + (this.EnemyPokemon.level))
                         while (savePokemon.experience > Math.pow(savePokemon.level, 3) && savePokemon.level < 100) {
                             savePokemon.experience -= Math.pow(savePokemon.level, 3)
                             savePokemon.level++
@@ -108,7 +108,8 @@ export class PokemonBattleComponent implements OnInit {
  
     CreateBattlePokemonProfile(id: number | null, pokemon: PokemonFull, level: number, player: boolean) {
         let battlePokemon: BattlePokemon = {
-            id: pokemon.id,
+            id: id,
+            pokemonid: pokemon.id,
             species: pokemon.species,
             level: level,
             hitpoints: Math.floor(pokemon.hitpoints * (1 + (level/50))),
@@ -160,7 +161,7 @@ export class PokemonBattleComponent implements OnInit {
 				this.GetRandomEnemy(this.GetAverageTeamBattlescore(), (enemyResult: EnemyObject) => {
 					this.EnemyPokemonFull = enemyResult.pokemon;
 					if (enemyResult) {
-						this.EnemyPokemon = this.CreateBattlePokemonProfile(null, enemyResult.pokemon, enemyResult.level, false)
+						this.EnemyPokemon = this.CreateBattlePokemonProfile(0, enemyResult.pokemon, enemyResult.level, false)
 					}
 				})
             });
@@ -196,7 +197,7 @@ export class PokemonBattleComponent implements OnInit {
             }
             else {
                 target.current_hitpoints -= damage;
-                if (target == this.PlayerPokemon) {
+                if (target == this.PlayerPokemon && target.id) {
                     let playerPokemon: Pokemon | null = this.GetPokemonFromID(target.id);
                     if (playerPokemon) {
                         playerPokemon.current_hitpoints = target.current_hitpoints;

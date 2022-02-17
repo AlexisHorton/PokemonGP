@@ -1,5 +1,6 @@
 export interface BattlePokemon {
-    id: number;
+    id: number | null;
+    pokemonid: number;
     species: string;
     level: number;
     hitpoints: number;

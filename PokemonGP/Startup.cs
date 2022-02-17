@@ -46,6 +46,8 @@ namespace PokemonGP
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("LocalOriginsPolicy");
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
